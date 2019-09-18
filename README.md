@@ -1,2 +1,2 @@
 # toads-and-frogs
-Its a fun Game!
+It's a fun game!
