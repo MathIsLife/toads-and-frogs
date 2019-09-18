@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toads_and_frogs/buttons/round_button.dart';
+import 'dart:async' show Future;
 
 class First extends StatefulWidget {
   @override
@@ -18,13 +19,14 @@ class _FirstState extends State<First> {
           children: <Widget>[
             Center(
               child: Text(
-                'Toads & Frogs',
+                'Toads and Frogs',
                 style: TextStyle(color: Colors.amber, fontSize: 60.0),
               ),
             ),
             RoundButton(
               onPressed: () {
                 print('pressed');
+                navigateToGameScreen(context);
               },
               text: Text(
                 'New Game',
@@ -113,3 +115,19 @@ class _FirstState extends State<First> {
     );
   }
 }
+
+Future navigateToGameScreen(context) async {
+  Navigator.push(context, MaterialPageRoute(builder: (context) => SecondState()));
+}
+
+class SecondState extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Image.asset('assets/game_screen.png'),
+      )
+    );
+  }
+}
+
