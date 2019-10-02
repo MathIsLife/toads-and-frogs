@@ -39,7 +39,7 @@ class ClippedButton extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
             image: DecorationImage(
-              image: AssetImage(kiPlay),
+              image: AssetImage(null),
             ),
           ),
           child: FlatButton(
