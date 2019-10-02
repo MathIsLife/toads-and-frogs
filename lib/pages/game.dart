@@ -38,7 +38,7 @@ class MyGame extends Game {
 
     //initializing tiles
     totalTiles = 12;
-    gap = screenWidth / 15.0;
+    gap = 0;
     totalScreenWidth = totalTiles * (gap + tileSize) + 10.0;
     double tx = tileSize / 2.0;
     double ty = screenHeight / 2.0 - tileSize / 2.0;

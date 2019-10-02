@@ -29,14 +29,17 @@ class Tile {
   }
   void shiftEm(Offset d) {
     if (d.dx > 0) { // moving right
-
-      if(game.tiles[0].posX < 10.0) {
+      print('moving right');
+      if(game.tiles[0].posX  < 50.0) {
         tileRect = tileRect.shift(d);
+        this.posX += d.dx;
       }
     }
-    else { //moving left
-      if (game.tiles[game.totalTiles -1].posX > game.screenWidth - tileSize - 10.0) {
+    else { //moving left\
+      print('moving left');
+      if (game.tiles[game.totalTiles - 1].posX  > game.screenWidth - tileSize - 30.0) {
         tileRect = tileRect.shift(d);
+        this.posX += d.dx;
       }
     }
     
