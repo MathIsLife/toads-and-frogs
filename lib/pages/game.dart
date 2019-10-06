@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:toads_and_frogs/components/tiles.dart';
 
 class MyGame extends Game {
+  //routeName
+  static String route = '/game_page';
   // screen size , screen's widt and height
   Size screenSize;
   double screenWidth, screenHeight;
@@ -16,6 +18,7 @@ class MyGame extends Game {
   Paint bgPaint;
 
   // size and properties of tiles where frogs will be placed
+  double left, right;
   double tileSize;
   int totalTiles;
   double totalScreenWidth;
@@ -36,28 +39,30 @@ class MyGame extends Game {
     bgRect = Rect.fromLTWH(0, 0, double.infinity, screenHeight);
     bgPaint = Paint()..color = Colors.white;
 
-    //initializing tiles
-    totalTiles = 12;
-    gap = 0;
-    totalScreenWidth = totalTiles * (gap + tileSize) + 10.0;
+    //initializing tiles (maximum 10 ^ 5, for good fps 100)
+    totalTiles = 9;
+    gap = 10.0;
+    totalScreenWidth = totalTiles * (gap + tileSize);
     double tx = tileSize / 2.0;
     double ty = screenHeight / 2.0 - tileSize / 2.0;
     tiles = List<Tile>();
+
     for (int i = 0; i < totalTiles; i++) {
       tiles.add(Tile(this, tx, ty, i));
       tx = tx + tileSize + gap;
     }
 
+    left = tiles[0].tileRect.left;
+    right = tiles[totalTiles - 1].tileRect.right;
+
     //adding gestures
-    tapper = TapGestureRecognizer();
-    tapper.onTapDown = this.onTapDown;
+    tapper = TapGestureRecognizer()..onTapDown = this.onTapDown;
     Flame.util.addGestureRecognizer(tapper);
 
     drag = HorizontalDragGestureRecognizer()
-      ..onDown = this.onDragDown
-      ..onStart = this.onDragStart
-      ..onUpdate = this.onDragUpdate
-      ..onEnd = this.onDragEnd;
+      ..onStart = null
+      ..onEnd = this.onDragEnd
+      ..onUpdate = this.onDragUpdate;
     Flame.util.addGestureRecognizer(drag);
   }
 
@@ -78,22 +83,19 @@ class MyGame extends Game {
 
   void onTapDown(TapDownDetails td) {}
 
-  void onDragDown(DragDownDetails dd) {
-    print("down");
-  }
-
   void onDragEnd(DragEndDetails de) {
-    print('end!');
+    
   }
 
   void onDragUpdate(DragUpdateDetails du) {
-    tiles.forEach((Tile t) {
-      t.shiftEm(du.delta);
-    });
-  }
-
-  void onDragStart(DragStartDetails ds) {
-    print('start!');
+    print(du.globalPosition.dx);
+    tiles.forEach(
+      (Tile t) {
+        t.shiftEm(du.delta, left, right);
+      },
+    );
+    left = tiles[0].tileRect.left;
+    right = tiles[totalTiles - 1].tileRect.right;
   }
 
   void resize(Size size) {

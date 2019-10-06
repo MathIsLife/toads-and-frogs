@@ -15,15 +15,15 @@ class RoundButton extends StatelessWidget {
         children: <Widget>[
           ClipOval(
             child: Container(
-              width: (size == null) ? 50.0 : size,
-              height: (size == null) ? 50.0 : size,
+              width: size,
+              height: size,
               color: Colors.amber,
               child: IconButton(
                 icon: icon,
-                iconSize: (size == null) ? 30.0 : 1.5 * size / 2,
+                iconSize: size / 1.5,
                 onPressed: onPressed,
                 splashColor: Colors.amberAccent,
-         
+
               ),
             ),
           ),
