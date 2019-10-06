@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:toads_and_frogs/constants.dart';
 
 class CustomButtom extends StatefulWidget {
   @override
@@ -38,9 +37,7 @@ class ClippedButton extends StatelessWidget {
           width: 250.0,
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
-            image: DecorationImage(
-              image: AssetImage(null),
-            ),
+            
           ),
           child: FlatButton(
             padding: EdgeInsets.all(0.0),
