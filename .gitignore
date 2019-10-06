@@ -8,7 +8,7 @@
 .buildlog/
 .history
 .svn/
-*assets/
+.packages.txt
 
 # IntelliJ related
 *.iml
