@@ -1,0 +1,1 @@
+enum TileAvatar { empty, frog, toad }

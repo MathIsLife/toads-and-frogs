@@ -31,7 +31,7 @@ class _FirstState extends State<FirstPage> {
             ),
             RoundButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/game_loop');
+                Navigator.pushNamed(context, '/game_screen');
               },
               text: Text(
                 'New Game',

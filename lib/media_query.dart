@@ -14,7 +14,6 @@ class Query {
     height = screenSize.height;
     block = width / hBox;
     vBox = height/ block;
-    print('$width ' '$height');
-    print('$hBox' ' $vBox');
+   
   }
 }

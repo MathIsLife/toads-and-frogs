@@ -26,6 +26,7 @@ dependencies:
   flutter_svg: ^0.14.1
   flare_flutter: ^1.5.8
   flame: ^0.10.2
+  provider: any
 
 dev_dependencies:
   flutter_test:
