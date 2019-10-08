@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toads_and_frogs/backend/game_controller.dart';
+import 'package:toads_and_frogs/backend/score.dart';
 import 'package:toads_and_frogs/constants.dart';
 import 'package:toads_and_frogs/backend/enums.dart';
 
@@ -13,27 +14,36 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Scaffold(
-        body: Container(
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Center(
-                  child: Text(
-                    'Total hops: 5',
-                    style: TextStyle(fontSize: 50.0),
+        return Material(
+          child: Scaffold(
+            body: Container(
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Center(
+                      child: ScoreWidget(),
+                    ),
                   ),
-                ),
+                  Expanded(
+                    child: TileList(),
+                  )
+                ],
               ),
-              Expanded(
-                child: TileList(),
-              )
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      }
+    
+}
+
+class ScoreWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final Score scr = Provider.of<Score>(context);
+    return Text(
+      'Hops: frog: ${scr.frogHop}, toad: ${scr.toadHop}',
+      style: TextStyle(fontSize: 50.0, fontFamily: 'Fira Code'),
     );
   }
 }
@@ -97,6 +107,7 @@ class Tile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Score scr = Provider.of<Score>(context);
     final GameController gc = Provider.of<GameController>(context);
     return Center(
       child: Stack(
@@ -123,6 +134,7 @@ class Tile extends StatelessWidget {
                 } else if (gc.list[next] == TileAvatar.toad &&
                     next + 1 < gc.list.length) {
                   if (gc.list[next + 1] == TileAvatar.empty) {
+                    scr.incrementHop(TileAvatar.frog);
                     gc.setAvatarAt(cur, TileAvatar.empty);
                     gc.setAvatarAt(next + 1, TileAvatar.frog);
                   }
@@ -134,6 +146,7 @@ class Tile extends StatelessWidget {
                 } else if (gc.list[prev] == TileAvatar.frog &&
                     prev - 1 >= 0 &&
                     gc.list[prev - 1] == TileAvatar.empty) {
+                  scr.incrementHop(TileAvatar.toad);
                   gc.setAvatarAt(cur, TileAvatar.empty);
                   gc.setAvatarAt(prev - 1, TileAvatar.toad);
                 }

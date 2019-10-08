@@ -24,7 +24,7 @@ class GameController extends ChangeNotifier {
   }
 
   int getAvatarListLength() {
-    _avatarList.length;
+    return _avatarList.length;
   }
 
   TileAvatar avatarAt(int i) => _avatarList[i];
