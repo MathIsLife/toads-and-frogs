@@ -14,6 +14,5 @@ class Query {
     height = screenSize.height;
     block = width / hBox;
     vBox = height/ block;
-   
   }
 }

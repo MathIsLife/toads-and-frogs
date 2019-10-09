@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toads_and_frogs/buttons/round_button.dart';
-import 'package:toads_and_frogs/media_query.dart';
+import 'package:toads_and_frogs/query.dart';
 
 class FirstPage extends StatefulWidget {
   static String route = '/';
@@ -25,24 +25,22 @@ class _FirstState extends State<FirstPage> {
             Center(
               child: Text(
                 'Toads & Frogs',
-                style:
-                    TextStyle(color: Colors.amber, fontSize: block * 9.0),
+                style: TextStyle(
+                  color: Colors.amber,
+                  fontSize: block * 9.0,
+                ),
               ),
             ),
             RoundButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/game_screen');
               },
-              text: Text(
-                'New Game',
-                style:
-                    TextStyle(color: Colors.black87, fontSize: block * 5),
-              ),
+              tooltip: 'New Game',
               icon: Icon(
                 Icons.play_arrow,
                 color: Colors.black87,
               ),
-              size: (100.0 / block) * block,
+              size: 15 * block,
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -54,71 +52,56 @@ class _FirstState extends State<FirstPage> {
                           print('loaded game');
                         }
                       : null,
-                  text: Text(
-                    'Load Game',
-                    style: TextStyle(color: Colors.black87, fontSize: 20.0),
-                  ),
+                  tooltip: 'Load Saved Game',
                   icon: Icon(
                     Icons.navigate_next,
                     color: (isLoadGame) ? Colors.black : Colors.grey,
                   ),
-                  size: block * (50.0 / block),
+                  size: block * 7,
                 ),
                 RoundButton(
                   onPressed: () {
                     print("Multiplayer");
                   },
-                  text: Text(
-                    'Multiplayer',
-                    style: TextStyle(color: Colors.black87, fontSize: 20.0),
-                  ),
+                  tooltip: 'Multiplayer',
                   icon: Icon(
                     Icons.wc,
                     color: Colors.black,
                   ),
-                  size: block * (50.0 / block),
+                  size: block * 7,
                 ),
                 RoundButton(
                   onPressed: () {
                     print("Settings");
                   },
-                  text: Text(
-                    'Settings',
-                    style: TextStyle(color: Colors.black87, fontSize: 20.0),
-                  ),
+                  tooltip: 'Settings',
                   icon: Icon(
                     Icons.settings,
                     color: Colors.black,
                   ),
-                  size: block * (50.0 / block),
+                  size: block * 7,
                 ),
                 RoundButton(
                   onPressed: () {
                     print("Stats");
                   },
-                  text: Text(
-                    'Stats',
-                    style: TextStyle(color: Colors.black87, fontSize: 20.0),
-                  ),
+                  tooltip: 'Stats',
                   icon: Icon(
                     Icons.assessment,
                     color: Colors.black,
                   ),
-                  size: block * (50.0 / block),
+                  size: block * 7,
                 ),
                 RoundButton(
                   onPressed: () {
                     print("Help me!");
                   },
-                  text: Text(
-                    'Help',
-                    style: TextStyle(color: Colors.black87, fontSize: 20.0),
-                  ),
+                  tooltip: 'Instructions',
                   icon: Icon(
                     Icons.help_outline,
                     color: Colors.black,
                   ),
-                  size: block * (50.0 / block),
+                  size: block * 7,
                 ),
               ],
             ),

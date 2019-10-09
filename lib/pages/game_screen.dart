@@ -4,6 +4,7 @@ import 'package:toads_and_frogs/backend/game_controller.dart';
 import 'package:toads_and_frogs/backend/score.dart';
 import 'package:toads_and_frogs/constants.dart';
 import 'package:toads_and_frogs/backend/enums.dart';
+import 'package:toads_and_frogs/query.dart';
 
 class GameScreen extends StatefulWidget {
   static String route = '/game_screen';
@@ -14,36 +15,36 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
-        return Material(
-          child: Scaffold(
-            body: Container(
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Center(
-                      child: ScoreWidget(),
-                    ),
-                  ),
-                  Expanded(
-                    child: TileList(),
-                  )
-                ],
+    Query q = Query(context);
+    return Scaffold(
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: q.block * 2,),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Center(
+                child: ScoreWidget(),
               ),
             ),
-          ),
-        );
-      }
-    
+            Expanded(
+              child: TileList(),
+            )
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class ScoreWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Query q = Query(context);
     final Score scr = Provider.of<Score>(context);
     return Text(
-      'Hops: frog: ${scr.frogHop}, toad: ${scr.toadHop}',
-      style: TextStyle(fontSize: 50.0, fontFamily: 'Fira Code'),
+      'Hops: Frog: ${scr.frogHop}, Toad: ${scr.toadHop}',
+      style: TextStyle(fontSize: q.block * 5,color: Colors.orange),
     );
   }
 }
@@ -61,11 +62,12 @@ class _TileListState extends State<TileList> {
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
-        itemCount: 12,
-        padding: EdgeInsets.all(25.0),
+        itemCount: Provider.of<GameController>(context, listen: false)
+            .getAvatarListLength(),
+        padding: const EdgeInsets.all(25.0),
         itemBuilder: (BuildContext context, int index) {
           return Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Tile(
               index: index,
             ),
@@ -107,6 +109,7 @@ class Tile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Query q =  Query(context);
     final Score scr = Provider.of<Score>(context);
     final GameController gc = Provider.of<GameController>(context);
     return Center(
@@ -114,10 +117,10 @@ class Tile extends StatelessWidget {
         fit: StackFit.loose,
         children: <Widget>[
           Container(
-            height: 150.0,
-            width: 150.0,
+            height: q.block * 20,
+            width: q.block * 20,
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.blueAccent, width: 4.0),
+              border: Border.all(color: Colors.white10, width: q.block * 0.7),
               borderRadius: BorderRadius.circular(20.0),
             ),
             child: Image(
@@ -126,36 +129,12 @@ class Tile extends StatelessWidget {
           ),
           GestureDetector(
             onDoubleTap: () {
-              int cur = index, prev = index - 1, next = index + 1;
-              if (gc.list[cur] == TileAvatar.frog && next < gc.list.length) {
-                if (gc.list[next] == TileAvatar.empty) {
-                  gc.setAvatarAt(cur, TileAvatar.empty);
-                  gc.setAvatarAt(next, TileAvatar.frog);
-                } else if (gc.list[next] == TileAvatar.toad &&
-                    next + 1 < gc.list.length) {
-                  if (gc.list[next + 1] == TileAvatar.empty) {
-                    scr.incrementHop(TileAvatar.frog);
-                    gc.setAvatarAt(cur, TileAvatar.empty);
-                    gc.setAvatarAt(next + 1, TileAvatar.frog);
-                  }
-                }
-              } else if (gc.list[cur] == TileAvatar.toad && prev >= 0) {
-                if (gc.list[prev] == TileAvatar.empty) {
-                  gc.setAvatarAt(cur, TileAvatar.empty);
-                  gc.setAvatarAt(prev, TileAvatar.toad);
-                } else if (gc.list[prev] == TileAvatar.frog &&
-                    prev - 1 >= 0 &&
-                    gc.list[prev - 1] == TileAvatar.empty) {
-                  scr.incrementHop(TileAvatar.toad);
-                  gc.setAvatarAt(cur, TileAvatar.empty);
-                  gc.setAvatarAt(prev - 1, TileAvatar.toad);
-                }
-              }
+              gc.onDoubleTapped(index, scr);
             },
             child: Container(
               margin: EdgeInsets.all(10),
-              height: 100.0,
-              width: 100.0,
+              height: q.block * 15,
+              width: q.block * 15,
               child: getAvatar(gc.list[index]),
             ),
           )
