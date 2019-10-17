@@ -4,6 +4,7 @@ import 'package:toads_and_frogs/backend/game_controller.dart';
 import 'package:toads_and_frogs/backend/score.dart';
 import 'package:toads_and_frogs/constants.dart';
 import 'package:toads_and_frogs/backend/enums.dart';
+import 'package:toads_and_frogs/pages/game_result.dart';
 import 'package:toads_and_frogs/query.dart';
 
 class GameScreen extends StatefulWidget {
@@ -84,7 +85,7 @@ class Tile extends StatelessWidget {
   Tile({
     this.index,
   }) {
-    print('${++count}');
+    //print('${++count}');
   }
 
   Widget getAvatar(TileAvatar avatar) {
@@ -112,13 +113,14 @@ class Tile extends StatelessWidget {
     Query q =  Query(context);
     final Score scr = Provider.of<Score>(context);
     final GameController gc = Provider.of<GameController>(context);
+    
     return Center(
       child: Stack(
         fit: StackFit.loose,
         children: <Widget>[
           Container(
-            height: q.block * 20,
-            width: q.block * 20,
+            height: q.block * 9,
+            width: q.block * 9,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.white10, width: q.block * 0.7),
               borderRadius: BorderRadius.circular(20.0),
@@ -130,11 +132,14 @@ class Tile extends StatelessWidget {
           GestureDetector(
             onDoubleTap: () {
               gc.onDoubleTapped(index, scr);
+              if (gc.gameState != GameController.CONTINUE_GAME) {
+                Navigator.pushNamed(context, GameResult.route);
+              }
             },
             child: Container(
-              margin: EdgeInsets.all(10),
-              height: q.block * 15,
-              width: q.block * 15,
+              margin: EdgeInsets.all(0),
+              height: q.block * 7,
+              width: q.block * 7,
               child: getAvatar(gc.list[index]),
             ),
           )
