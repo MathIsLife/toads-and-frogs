@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toads_and_frogs/backend/game_controller.dart';
+import 'package:toads_and_frogs/pages/game_screen.dart';
 import 'package:toads_and_frogs/query.dart';
+
+import 'first_page.dart';
 
 class GameResult extends StatefulWidget {
   static final route = '/game_result';
@@ -16,12 +19,11 @@ class _GameResultState extends State<GameResult> {
   String winner = '';
   Color resColor = Colors.white;
 
-  String getWinner(int x) {
-    if (x == 1) {
+  String getWinner() {
+    if (who == 1) {
       resColor = Colors.green;
       return uWon;
-    }
-    else if (x == 2) {
+    } else if (who == 2) {
       resColor = Colors.red;
       return aiWon;
     }
@@ -30,21 +32,34 @@ class _GameResultState extends State<GameResult> {
 
   @override
   Widget build(BuildContext context) {
-    int whoWon = Provider.of<GameController>(context, listen: false).gameState;
-    winner = getWinner(whoWon);
+    
+    winner = getWinner();
     Query q = Query(context);
     double block = q.block;
 
     return Scaffold(
       body: Center(
-        child: Container(
-          child: Text(
-            winner,
-            style: TextStyle(
-              color: resColor,
-              fontSize: block * 8,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              child: Text(
+                winner,
+                style: TextStyle(
+                  color: resColor,
+                  fontSize: block * 8,
+                ),
+              ),
             ),
-          ),
+            SizedBox(height: 20.0,),
+            FlatButton(
+              color: Colors.amber,
+              child: Text('New Game',style: TextStyle(fontSize: 25),),
+              onPressed: () {
+                Navigator.pushNamed(context, GameScreen.route);
+              },
+            )
+          ],
         ),
       ),
     );

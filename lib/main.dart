@@ -12,27 +12,25 @@ Future main() async {
   await SystemChrome.setPreferredOrientations(
     [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight],
   );
-  GameController gc = GameController();
-  Score score = Score();
 
   Widget getApp() {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          builder: (context) => gc,
-        ),
-        ChangeNotifierProvider(
-          builder: (context) => score,
-        )
-      ],
-      child: MaterialApp(
-        initialRoute: '/',
-        routes: {
-          FirstPage.route: (context) => FirstPage(),
-          GameScreen.route: (context) => GameScreen(),
-          GameResult.route: (context) => GameResult(),
-        },
-      ),
+    return MaterialApp(
+      initialRoute: '/',
+      routes: {
+        FirstPage.route: (context) => FirstPage(),
+        GameScreen.route: (context) => MultiProvider(
+              providers: [
+                ChangeNotifierProvider(
+                  builder: (context) => GameController(),
+                ),
+                ChangeNotifierProvider(
+                  builder: (context) =>  Score(),
+                )
+              ],
+              child: GameScreen(),
+            ),
+        GameResult.route: (context) => GameResult(),
+      },
     );
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:toads_and_frogs/backend/enums.dart';
 import 'package:toads_and_frogs/backend/score.dart';
+import 'package:toads_and_frogs/pages/game_screen.dart';
 import 'dart:math' as math;
 
 class GameController extends ChangeNotifier {
@@ -17,6 +18,9 @@ class GameController extends ChangeNotifier {
 
   // TODO: where will be frogs and where will be toads
   GameController() {
+    resetGame();
+  }
+  void resetGame() {
     _avatarList.add(TileAvatar.frog);
     _avatarList.add(TileAvatar.frog);
     _avatarList.add(TileAvatar.frog);
@@ -28,7 +32,6 @@ class GameController extends ChangeNotifier {
     _avatarList.add(TileAvatar.toad);
     fireUpDP();
   }
-
   int getAvatarListLength() {
     return _avatarList.length;
   }
@@ -149,6 +152,7 @@ class GameController extends ChangeNotifier {
       }
 
       if (validMoves.isEmpty) {
+        who = 1;
         return USER_WON;
       }
 
@@ -172,7 +176,7 @@ class GameController extends ChangeNotifier {
         }
       }
     }
-
+    who = 2;
     return COMPUTER_WON;
   }
 

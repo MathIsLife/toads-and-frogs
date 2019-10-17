@@ -12,7 +12,7 @@ class GameScreen extends StatefulWidget {
   @override
   _GameScreenState createState() => _GameScreenState();
 }
-
+int who = 1; //player
 class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
