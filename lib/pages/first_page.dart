@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toads_and_frogs/buttons/round_button.dart';
+import 'package:toads_and_frogs/pages/init_config.dart';
 import 'package:toads_and_frogs/query.dart';
 
 class FirstPage extends StatefulWidget {
@@ -33,7 +34,7 @@ class _FirstState extends State<FirstPage> {
             ),
             RoundButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/game_screen');
+                Navigator.pushNamed(context, InitConfig.route);
               },
               tooltip: 'New Game',
               icon: Icon(

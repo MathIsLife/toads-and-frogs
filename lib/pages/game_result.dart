@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:toads_and_frogs/backend/game_controller.dart';
 import 'package:toads_and_frogs/pages/game_screen.dart';
+import 'package:toads_and_frogs/pages/init_config.dart';
 import 'package:toads_and_frogs/query.dart';
 
-import 'first_page.dart';
 
 class GameResult extends StatefulWidget {
   static final route = '/game_result';
@@ -32,7 +30,6 @@ class _GameResultState extends State<GameResult> {
 
   @override
   Widget build(BuildContext context) {
-    
     winner = getWinner();
     Query q = Query(context);
     double block = q.block;
@@ -51,12 +48,18 @@ class _GameResultState extends State<GameResult> {
                 ),
               ),
             ),
-            SizedBox(height: 20.0,),
+            SizedBox(
+              height: 20.0,
+            ),
             FlatButton(
               color: Colors.amber,
-              child: Text('New Game',style: TextStyle(fontSize: 25),),
+              child: Text(
+                'New Game',
+                style: TextStyle(fontSize: 25),
+              ),
               onPressed: () {
-                Navigator.pushNamed(context, GameScreen.route);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => InitConfig()));
               },
             )
           ],

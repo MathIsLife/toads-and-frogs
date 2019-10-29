@@ -133,7 +133,7 @@ class Tile extends StatelessWidget {
             onDoubleTap: () {
               gc.onDoubleTapped(index, scr);
               if (gc.gameState != GameController.CONTINUE_GAME) {
-                Navigator.pushNamed(context, GameResult.route);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => GameResult()));
               }
             },
             child: Container(

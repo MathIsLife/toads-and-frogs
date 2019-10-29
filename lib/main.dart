@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'package:toads_and_frogs/backend/game_controller.dart';
-import 'package:toads_and_frogs/backend/score.dart';
 import 'package:toads_and_frogs/pages/first_page.dart';
-import 'package:toads_and_frogs/pages/game_result.dart';
-import 'package:toads_and_frogs/pages/game_screen.dart';
+import 'package:toads_and_frogs/pages/init_config.dart';
 
 Future main() async {
   await SystemChrome.setEnabledSystemUIOverlays([]);
@@ -18,18 +14,7 @@ Future main() async {
       initialRoute: '/',
       routes: {
         FirstPage.route: (context) => FirstPage(),
-        GameScreen.route: (context) => MultiProvider(
-              providers: [
-                ChangeNotifierProvider(
-                  builder: (context) => GameController(),
-                ),
-                ChangeNotifierProvider(
-                  builder: (context) =>  Score(),
-                )
-              ],
-              child: GameScreen(),
-            ),
-        GameResult.route: (context) => GameResult(),
+        InitConfig.route: (context) => InitConfig(),
       },
     );
   }

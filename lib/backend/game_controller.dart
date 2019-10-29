@@ -2,10 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:toads_and_frogs/backend/enums.dart';
 import 'package:toads_and_frogs/backend/score.dart';
 import 'package:toads_and_frogs/pages/game_screen.dart';
-import 'dart:math' as math;
+
 
 class GameController extends ChangeNotifier {
-  static const int SIZE = 12;
+  static int SIZE = 12;
   static const int USER_WON = 1;
   static const int COMPUTER_WON = 2;
   static const int CONTINUE_GAME = 3;
@@ -13,23 +13,27 @@ class GameController extends ChangeNotifier {
   static const int HARD = 2;
 
   int gameDifficulty = HARD;
+  int frogs , toads, leafs;
+
   int gameState = CONTINUE_GAME;
   List<TileAvatar> _avatarList = List<TileAvatar>();
 
   // TODO: where will be frogs and where will be toads
-  GameController() {
+  GameController({this.gameDifficulty = HARD, this.frogs = 3, this.leafs = 12}) {
+    toads = frogs;
     resetGame();
   }
   void resetGame() {
+    SIZE = leafs;
+    for(int i = 0; i<frogs; i++)
     _avatarList.add(TileAvatar.frog);
-    _avatarList.add(TileAvatar.frog);
-    _avatarList.add(TileAvatar.frog);
-    for (int i = 0; i < SIZE - 6; ++i) {
+  
+    for (int i = 0; i < leafs - toads - frogs; ++i) {
       _avatarList.add(TileAvatar.empty);
     }
+    for(int i = 0; i<toads; i++)
     _avatarList.add(TileAvatar.toad);
-    _avatarList.add(TileAvatar.toad);
-    _avatarList.add(TileAvatar.toad);
+    
     fireUpDP();
   }
   int getAvatarListLength() {
