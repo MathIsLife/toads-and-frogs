@@ -3,6 +3,8 @@ import 'package:toads_and_frogs/buttons/round_button.dart';
 import 'package:toads_and_frogs/pages/init_config.dart';
 import 'package:toads_and_frogs/query.dart';
 
+import 'level_page.dart';
+
 class FirstPage extends StatefulWidget {
   static String route = '/';
   @override
@@ -34,7 +36,7 @@ class _FirstState extends State<FirstPage> {
             ),
             RoundButton(
               onPressed: () {
-                Navigator.pushNamed(context, InitConfig.route);
+                Navigator.pushNamed(context, LevelPage.route);
               },
               tooltip: 'New Game',
               icon: Icon(

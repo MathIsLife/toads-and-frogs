@@ -26,7 +26,6 @@ class GameController extends ChangeNotifier {
     this.leafs = 12,
     this.userFirst = false,
   }) {
-    toads = frogs;
     gameState = CONTINUE_GAME;
     resetGame();
   }
