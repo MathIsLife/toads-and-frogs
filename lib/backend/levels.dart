@@ -26,14 +26,11 @@ class LevelData {
   static Map<String, dynamic> data;
   static List<Map<String, dynamic>> levelData = List<Map<String, dynamic>>();
 
-  LevelData() {
-    loadData();
-  }
-  Future loadJSON() async {
+  static Future loadJSON() async {
     return await rootBundle.loadString('json/levels.json');
   }
 
-  void loadData() async {
+  static void loadData() async {
     String jsonString = await loadJSON();
     final jsonRespone = await json.decode(jsonString);
     data = jsonRespone;

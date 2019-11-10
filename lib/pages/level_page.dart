@@ -19,6 +19,7 @@ class _LevelPageState extends State<LevelPage> {
       home: Scaffold(
         body: Container(
           child: GridView.builder(
+            physics: BouncingScrollPhysics(),
             gridDelegate:
                 SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5),
             itemCount: 20,
