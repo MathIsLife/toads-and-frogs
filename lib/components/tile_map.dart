@@ -13,7 +13,7 @@ class TileMap extends StatelessWidget {
         return Colors.green;
         break;
       case TileAvatar.toad:
-        return Colors.red;
+        return Colors.brown;
         break;
       default:
         return Colors.white;
@@ -26,17 +26,19 @@ class TileMap extends StatelessWidget {
     List<TileAvatar> list = gc.list;
     return Center(
       child: Container(
-        width: 45 * list.length + 23.0,
+        width: 50 * list.length + 23.0,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: list.length,
           padding: EdgeInsets.all(13.0),
           itemBuilder: (context, index) {
             return Container(
+              padding: EdgeInsets.all(8.0),
+              margin: EdgeInsets.all(2.0),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: getColor(gc.list[index]),
-                border: Border.all(color: Colors.black38, width: 3.0),
+                border: Border.all(color: Colors.white60, width: 3.0),
               ),
               width: 45,
               height: 45,

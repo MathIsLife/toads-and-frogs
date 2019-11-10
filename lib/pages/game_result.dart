@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:toads_and_frogs/backend/enums.dart';
-import 'package:toads_and_frogs/components/tiles.dart';
 import 'package:toads_and_frogs/constants.dart';
 import 'package:toads_and_frogs/query.dart';
 

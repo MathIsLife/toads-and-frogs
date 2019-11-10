@@ -4,6 +4,7 @@ import 'package:toads_and_frogs/backend/game_controller.dart';
 import 'package:toads_and_frogs/backend/score.dart';
 import 'package:toads_and_frogs/components/tile_map.dart';
 import 'package:toads_and_frogs/components/tiles.dart';
+import 'package:toads_and_frogs/constants.dart';
 import 'package:toads_and_frogs/query.dart';
 
 class GameScreen extends StatefulWidget {
@@ -20,6 +21,12 @@ class _GameScreenState extends State<GameScreen> {
     Query q = Query(context);
     return Scaffold(
       body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(kiBg1),
+              fit: BoxFit.fitHeight,
+              alignment: Alignment.center),
+        ),
         child: Column(
           children: <Widget>[
             SizedBox(
@@ -52,7 +59,7 @@ class ScoreWidget extends StatelessWidget {
     final Score scr = Provider.of<Score>(context);
     return Text(
       'Hops: Frog: ${scr.frogHop}, Toad: ${scr.toadHop}',
-      style: TextStyle(fontSize: q.block * 5, color: Colors.orange),
+      style: TextStyle(fontSize: q.block * 5, color: Colors.white),
     );
   }
 }

@@ -62,10 +62,10 @@ class Tile extends StatelessWidget {
           Container(
             height: q.block * 9,
             width: q.block * 9,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.white10, width: q.block * 0.7),
-              borderRadius: BorderRadius.circular(20.0),
-            ),
+            // decoration: BoxDecoration(
+            //   border: Border.all(color: Colors.white10, width: q.block * 0.7),
+            //   borderRadius: BorderRadius.circular(20.0),
+            // ),
             child: Image(
               image: AssetImage(kiLeaf),
             ),

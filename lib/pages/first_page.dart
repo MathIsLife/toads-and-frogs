@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:toads_and_frogs/buttons/round_button.dart';
-import 'package:toads_and_frogs/pages/init_config.dart';
 import 'package:toads_and_frogs/query.dart';
 
 import 'level_page.dart';

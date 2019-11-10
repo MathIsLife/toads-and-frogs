@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:toads_and_frogs/backend/game_controller.dart';
 import 'package:toads_and_frogs/backend/levels.dart';
 import 'package:toads_and_frogs/backend/score.dart';
+import 'package:toads_and_frogs/query.dart';
 
 import 'game_screen.dart';
 
@@ -17,16 +18,38 @@ class _LevelPageState extends State<LevelPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Container(
-          child: GridView.builder(
-            physics: BouncingScrollPhysics(),
-            gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5),
-            itemCount: 20,
-            itemBuilder: (context, index) {
-              return LevelTile(level: LevelData.levels[index]);
-            },
-          ),
+        body: Column(
+          children: <Widget>[
+            
+            Container(
+              height: 90.0,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Select a level you wish to play!',
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontSize: 30.0
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              width: Query(context).width,
+              height: Query(context).height - 95.0,
+              child: GridView.builder(
+                physics: BouncingScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 5),
+                itemCount: 20,
+                itemBuilder: (context, index) {
+                  return LevelTile(level: LevelData.levels[index]);
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -45,7 +68,6 @@ class LevelTile extends StatelessWidget {
       margin: EdgeInsets.all(20.0),
       decoration: BoxDecoration(
         border: Border.all(width: 3.0, color: Colors.amber),
-        
         shape: BoxShape.circle,
         color: Colors.amberAccent,
       ),
@@ -56,7 +78,7 @@ class LevelTile extends StatelessWidget {
         shape: CircleBorder(),
         child: Text(
           '${level.level}',
-          style: TextStyle(color: Colors.black87, fontSize: 40.0),
+          style: TextStyle(color: Colors.black87, fontSize: 30.0),
         ),
         onPressed: () {
           Navigator.push(
