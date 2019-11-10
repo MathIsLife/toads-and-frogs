@@ -1,63 +1,89 @@
-import 'dart:ui';
-
-import 'package:flame/position.dart';
-import 'package:flame/text_config.dart';
 import 'package:flutter/material.dart';
-import 'package:toads_and_frogs/pages/not_needed/game.dart';
+import 'package:provider/provider.dart';
+import 'package:toads_and_frogs/backend/enums.dart';
+import 'package:toads_and_frogs/backend/game_controller.dart';
+import 'package:toads_and_frogs/backend/score.dart';
+import 'package:toads_and_frogs/pages/game_result.dart';
+import 'package:toads_and_frogs/query.dart';
 
-class Tile {
-  double tileSize;
-  double posX, posY;
-  double textS;
-  final MyGame game;
-  Rect tileRect;
-  Paint tilePaint;
-  int tileId;
-  TextConfig t;
-  Rect textRect;
-  
+import '../constants.dart';
 
-  Tile(this.game, this.posX, this.posY, this.tileId) {
-    tileSize = game.tileSize;
-    tileRect = Rect.fromLTWH(posX, posY, tileSize, tileSize);
-    tilePaint = Paint()
-      ..color = Colors.amber
-      ..strokeWidth = tileSize * 0.05
-      ..style = PaintingStyle.stroke;
-    textS = game.screenWidth/100.0 * 5;
-    print('$textS $tileSize');
-    textRect = Rect.fromLTWH(posX, posY + tileSize + tileSize /10.0, tileSize/2, tileSize/2);
-    t = TextConfig(fontSize: textS, color: Colors.deepOrange);
+class Tile extends StatelessWidget {
+  static int count = 0;
+  final int index;
+  Tile({
+    this.index,
+  }) {
+    //print('${++count}');
   }
 
-  void render(Canvas c) {
-    c.drawRect(tileRect, tilePaint);
-    t.render(c, '${tileId + 1}', Position(posX + tileSize/2 -textS/2, posY + tileSize + tileSize / 10.0));
-  }
-
-  void update() {}
-
-  void shiftEffect(double u, double fx, double lx) {
-
-  }
-  
-  void shiftEm(Offset d, double fx, double lx) {
-    if (d.dx > 0) {
-      // moving right
-      if (fx + d.dx < tileSize / 2) {
-        tileRect = tileRect.shift(d);
-        posX = tileRect.left;
-        posY = tileRect.top;
-        print('moving right');
-      }
-    } else {
-      //moving left
-      if (lx + d.dx > game.screenWidth - tileSize / 2) {
-        tileRect = tileRect.shift(d);
-        posX = tileRect.left;
-        posY = tileRect.top;
-        print('moving left');
-      }
+  Widget getAvatar(TileAvatar avatar) {
+    switch (avatar) {
+      case TileAvatar.empty:
+        return Container();
+        break;
+      case TileAvatar.frog:
+        return Image(
+          image: AssetImage(kiFrog),
+        );
+        break;
+      case TileAvatar.toad:
+        return Image(
+          image: AssetImage(kiToad),
+        );
+        break;
+      default:
+        return Container();
     }
+  }
+  Future<void> gotoResult(context) async {
+    var gc = Provider.of<GameController>(context, listen: false);
+    Future.delayed(Duration(seconds: 2), () {
+      if (gc.gameState != GameController.CONTINUE_GAME) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => GameResult(),
+        ),
+      );
+    } 
+    });
+  }
+  @override
+  Widget build(BuildContext context) {
+    Query q = Query(context);
+    final Score scr = Provider.of<Score>(context);
+    final GameController gc = Provider.of<GameController>(context);
+
+    return Center(
+      child: Stack(
+        fit: StackFit.loose,
+        children: <Widget>[
+          Container(
+            height: q.block * 9,
+            width: q.block * 9,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.white10, width: q.block * 0.7),
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: Image(
+              image: AssetImage(kiLeaf),
+            ),
+          ),
+          GestureDetector(
+            onDoubleTap: () {
+              gc.onDoubleTapped(index, scr);
+              gotoResult(context);
+            },
+            child: Container(
+              margin: EdgeInsets.all(0),
+              height: q.block * 7,
+              width: q.block * 7,
+              child: getAvatar(gc.list[index]),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
