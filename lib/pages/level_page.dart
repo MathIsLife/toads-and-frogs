@@ -72,6 +72,7 @@ class LevelTile extends StatelessWidget {
         color: Colors.amberAccent,
       ),
       child: RaisedButton(
+        padding: EdgeInsets.all(0.0),
         color: Colors.amberAccent,
         splashColor: Colors.amber,
         elevation: 16.0,
