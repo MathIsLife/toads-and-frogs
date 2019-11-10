@@ -3,7 +3,6 @@ import 'package:toads_and_frogs/backend/enums.dart';
 import 'package:toads_and_frogs/backend/score.dart';
 import 'package:toads_and_frogs/pages/game_screen.dart';
 
-
 class GameController extends ChangeNotifier {
   static int SIZE = 12;
   static const int USER_WON = 1;
@@ -13,29 +12,48 @@ class GameController extends ChangeNotifier {
   static const int HARD = 2;
 
   int gameDifficulty = HARD;
-  int frogs , toads, leafs;
-
+  int frogs, toads, leafs;
   int gameState = CONTINUE_GAME;
+
   List<TileAvatar> _avatarList = List<TileAvatar>();
 
-  // TODO: where will be frogs and where will be toads
-  GameController({this.gameDifficulty = HARD, this.frogs = 3, this.leafs = 12}) {
+  bool hasUser, hasComp, userFirst;
+
+  GameController({
+    this.gameDifficulty = HARD,
+    this.frogs = 3,
+    this.toads = 3,
+    this.leafs = 12,
+    this.userFirst = false,
+  }) {
     toads = frogs;
+    gameState = CONTINUE_GAME;
     resetGame();
   }
-  void resetGame() {
+  Future resetGame() async {
     SIZE = leafs;
-    for(int i = 0; i<frogs; i++)
-    _avatarList.add(TileAvatar.frog);
-  
+    
+    for (int i = 0; i < frogs; i++) _avatarList.add(TileAvatar.frog);
+
     for (int i = 0; i < leafs - toads - frogs; ++i) {
       _avatarList.add(TileAvatar.empty);
     }
-    for(int i = 0; i<toads; i++)
-    _avatarList.add(TileAvatar.toad);
-    
-    fireUpDP();
+    for (int i = 0; i < toads; i++) _avatarList.add(TileAvatar.toad);
+
+    if (userFirst) {
+      hasUser = false;
+      hasComp = true;
+    } else {
+      Future.delayed(Duration(seconds: 1), () {
+        gameState = computerMove();
+        notifyListeners();
+        hasComp = true;
+        hasUser = false;
+      });
+    }
+    await fireUpDP();
   }
+
   int getAvatarListLength() {
     return _avatarList.length;
   }
@@ -57,15 +75,15 @@ class GameController extends ChangeNotifier {
     
 */
 
-  List <int> maskToList (int mask) {
-    List <int> ret = List <int> ();
+  List<int> maskToList(int mask) {
+    List<int> ret = List<int>();
     for (int i = 0; i < SIZE; ++i, mask ~/= 3) {
       ret.add(mask % 3);
     }
     return ret;
   }
 
-  int listToMask (List <int> list) {
+  int listToMask(List<int> list) {
     int mask = 0;
     for (int i = SIZE - 1; i >= 0; --i) {
       mask = mask * 3 + list[i];
@@ -74,17 +92,17 @@ class GameController extends ChangeNotifier {
   }
 
   int lim = 1;
-  List <int> dp = List <int> ();
-  List <int> parent = List <int> ();
+  List<int> dp = List<int>();
+  List<int> parent = List<int>();
 
-  int isWinning (int mask) {
+  int isWinning(int mask) {
     if (dp[mask] != -1) return dp[mask];
     dp[mask] = 0;
-    List <int> list = maskToList(mask);
+    List<int> list = maskToList(mask);
     for (int i = 0; i + 1 < SIZE; ++i) {
       if (list[i] == 1) {
         if (list[i + 1] == 0) {
-          List <int> newList = []..addAll(list);
+          List<int> newList = []..addAll(list);
           int tmp = newList[i];
           newList[i] = newList[i + 1];
           newList[i + 1] = tmp;
@@ -100,7 +118,7 @@ class GameController extends ChangeNotifier {
           }
         }
         if (i + 2 < SIZE && list[i + 1] == 2 && list[i + 2] == 0) {
-          List <int> newList = []..addAll(list);
+          List<int> newList = []..addAll(list);
           int tmp = newList[i];
           newList[i] = newList[i + 2];
           newList[i + 2] = tmp;
@@ -121,35 +139,37 @@ class GameController extends ChangeNotifier {
   }
 
   // compute optimal moves using dynamic programming
-  void fireUpDP() {
+  Future fireUpDP() async {
     for (int i = 0; i < SIZE; ++i) {
       lim *= 3;
     }
     for (int i = 0; i < lim; ++i) {
-      dp.add(-1); 
+      dp.add(-1);
       parent.add(-1);
     }
   }
 
   int computerMove() {
-    List <int> now = List <int> ();
+    List<int> now = List<int>();
     for (int i = SIZE - 1; i >= 0; --i) {
       if (_avatarList[i] == TileAvatar.empty) now.add(0);
       if (_avatarList[i] == TileAvatar.frog) now.add(2);
       if (_avatarList[i] == TileAvatar.toad) now.add(1);
     }
     int mask = listToMask(now), pos, oth;
-    print(now);
-    print(mask);
-    print(isWinning(mask));
+    // print(now);
+    // print(mask);
+    // print(isWinning(mask));
 
     if (gameDifficulty == EASY || isWinning(mask) == 0) {
-      List <int> validMoves = List <int> ();
+      List<int> validMoves = List<int>();
       for (int i = 1; i < SIZE; ++i) {
         if (_avatarList[i] == TileAvatar.toad) {
           if (_avatarList[i - 1] == TileAvatar.empty) {
             validMoves.add(i);
-          } else if (i > 1 && _avatarList[i - 1] == TileAvatar.frog && _avatarList[i - 2] == TileAvatar.empty) {
+          } else if (i > 1 &&
+              _avatarList[i - 1] == TileAvatar.frog &&
+              _avatarList[i - 2] == TileAvatar.empty) {
             validMoves.add(i);
           }
         }
@@ -166,8 +186,10 @@ class GameController extends ChangeNotifier {
       pos = SIZE - 1 - parent[mask];
     }
 
-    if (_avatarList[pos - 1] == TileAvatar.empty) oth = pos - 1;
-    else oth = pos - 2;
+    if (_avatarList[pos - 1] == TileAvatar.empty)
+      oth = pos - 1;
+    else
+      oth = pos - 2;
     TileAvatar tmp = _avatarList[oth];
     _avatarList[oth] = _avatarList[pos];
     _avatarList[pos] = tmp;
@@ -175,8 +197,10 @@ class GameController extends ChangeNotifier {
       if (_avatarList[i] == TileAvatar.frog) {
         if (_avatarList[i + 1] == TileAvatar.empty) {
           return CONTINUE_GAME;
-        } else if (i + 2 < SIZE && _avatarList[i + 1] == TileAvatar.toad && _avatarList[i + 2] == TileAvatar.empty) {
-          return CONTINUE_GAME;  
+        } else if (i + 2 < SIZE &&
+            _avatarList[i + 1] == TileAvatar.toad &&
+            _avatarList[i + 2] == TileAvatar.empty) {
+          return CONTINUE_GAME;
         }
       }
     }
@@ -186,24 +210,34 @@ class GameController extends ChangeNotifier {
 
   void onDoubleTapped(int index, Score scr) {
     int cur = index, prev = index - 1, next = index + 1;
-    bool hasGiven = false;
-    if (list[cur] == TileAvatar.frog && next < list.length) {
+    if (hasComp &&
+        !hasUser &&
+        list[cur] == TileAvatar.frog &&
+        next < list.length) {
       if (list[next] == TileAvatar.empty) {
-        hasGiven = true;
+        hasUser = true;
+        hasComp = false;
         setAvatarAt(cur, TileAvatar.empty);
         setAvatarAt(next, TileAvatar.frog);
       } else if (list[next] == TileAvatar.toad && next + 1 < list.length) {
         if (list[next + 1] == TileAvatar.empty) {
-          hasGiven = true;
+          hasUser = true;
+          hasComp = false;
           scr.incrementHop(TileAvatar.frog);
           setAvatarAt(cur, TileAvatar.empty);
           setAvatarAt(next + 1, TileAvatar.frog);
         }
       }
-      if (hasGiven) {
-        gameState = computerMove();
+      if (hasUser && !hasComp) {
+        Future.delayed(Duration(seconds: 1), () {
+          gameState = computerMove();
+          notifyListeners();
+          hasComp = true;
+          hasUser = false;
+        });
       }
     }
+
     // else if (list[cur] == TileAvatar.toad && prev >= 0) {
     //   if (list[prev] == TileAvatar.empty) {
     //     setAvatarAt(cur, TileAvatar.empty);
@@ -218,4 +252,3 @@ class GameController extends ChangeNotifier {
     // }
   }
 }
-

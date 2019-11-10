@@ -1,3 +1,4 @@
+/*
 import 'dart:ui';
 
 import 'package:flame/flame.dart';
@@ -105,3 +106,4 @@ class MyGame extends Game {
     tileSize = screenWidth / 9.0;
   }
 }
+*/
