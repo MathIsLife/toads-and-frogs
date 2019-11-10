@@ -43,7 +43,7 @@ class Tile extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => GameResult(),
+          builder: (context) => GameResult(whoWon: gc.gameState, list: gc.list,),
         ),
       );
     } 

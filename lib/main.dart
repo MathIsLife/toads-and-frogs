@@ -10,7 +10,7 @@ Future main() async {
   await SystemChrome.setPreferredOrientations(
     [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight],
   );
-  final lvl = LevelData();
+  LevelData.loadData(); // gotta initialize once 
   Widget getApp() {
     return MaterialApp(
       initialRoute: '/',
