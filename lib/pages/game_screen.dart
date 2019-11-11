@@ -6,6 +6,7 @@ import 'package:toads_and_frogs/components/tile_map.dart';
 import 'package:toads_and_frogs/components/tiles.dart';
 import 'package:toads_and_frogs/constants.dart';
 import 'package:toads_and_frogs/query.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class GameScreen extends StatefulWidget {
   static String route = '/game_screen';
@@ -23,7 +24,10 @@ class _GameScreenState extends State<GameScreen> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: Image.asset(kiBg1).image,
+            image: FadeInImage(
+              image: AssetImage(kiBg1),
+              placeholder: MemoryImage(kTransparentImage),
+            ).image,
             fit: BoxFit.fitHeight,
             alignment: Alignment.bottomLeft,
           ),

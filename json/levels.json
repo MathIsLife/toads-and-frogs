@@ -2,9 +2,9 @@
   {
     "level": 1,
     "diff": "easy",
-    "toads": 2,
-    "frogs": 4,
-    "leafs": 8,
+    "toads": 3,
+    "frogs": 3,
+    "leafs": 7,
     "firstMove": "user"
   },
   {
@@ -82,8 +82,8 @@
   {
     "level": 11,
     "diff": "hard",
-    "toads": 3,
-    "frogs": 3,
+    "toads": 4,
+    "frogs": 4,
     "leafs": 10,
     "firstMove": "comp"
   },
@@ -129,9 +129,9 @@
   },
   {
     "level": 17,
-    "diff": "easy",
-    "toads": 3,
-    "frogs": 4,
+    "diff": "hard",
+    "toads": 5,
+    "frogs": 5,
     "leafs": 13,
     "firstMove": "user"
   },

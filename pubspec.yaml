@@ -27,6 +27,7 @@ dependencies:
   flare_flutter: ^1.5.8
   flame: ^0.10.2
   provider: any
+  transparent_image: ^1.0.0
 
 dev_dependencies:
   flutter_test:
