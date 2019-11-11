@@ -51,7 +51,7 @@ class Tile extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    Query q = Query(context);
+    double block = Query.block;
     final Score scr = Provider.of<Score>(context);
     final GameController gc = Provider.of<GameController>(context);
 
@@ -60,8 +60,8 @@ class Tile extends StatelessWidget {
         fit: StackFit.loose,
         children: <Widget>[
           Container(
-            height: q.block * 9,
-            width: q.block * 9,
+            height: block * 9,
+            width: block * 9,
             // decoration: BoxDecoration(
             //   border: Border.all(color: Colors.white10, width: q.block * 0.7),
             //   borderRadius: BorderRadius.circular(20.0),
@@ -77,8 +77,8 @@ class Tile extends StatelessWidget {
             },
             child: Container(
               margin: EdgeInsets.all(0),
-              height: q.block * 7,
-              width: q.block * 7,
+              height: block * 7,
+              width: block * 7,
               child: getAvatar(gc.list[index]),
             ),
           )

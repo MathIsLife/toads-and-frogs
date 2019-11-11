@@ -15,8 +15,8 @@ class _FirstState extends State<FirstPage> {
   Query query;
   @override
   Widget build(BuildContext context) {
-    query = Query(context);
-    double block = query.block;
+    Query.loadAll(context);
+    double block = Query.block;
 
     return Scaffold(
       body: Container(

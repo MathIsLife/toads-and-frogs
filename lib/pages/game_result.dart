@@ -19,8 +19,8 @@ class GameResult extends StatefulWidget {
 class _GameResultState extends State<GameResult> {
   String aiWon = "Android Wins!";
   String uWon = "You Win!";
-  String winner = '';
-  Color resColor = Colors.white;
+  String winner;
+  Color resColor;
 
   String getWinner() {
     if (widget.whoWon == 1) {
@@ -36,8 +36,8 @@ class _GameResultState extends State<GameResult> {
   @override
   Widget build(BuildContext context) {
     winner = getWinner();
-    Query q = Query(context);
-    double block = q.block;
+    
+    double block = Query.block;
 
     return Scaffold(
       body: Scaffold(

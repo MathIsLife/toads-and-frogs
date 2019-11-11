@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class Query {
-  var mediaQuery;
-  Size screenSize;
-  double width, height;
-  double block;
-  double hBox = 100.0, vBox;
+  static var mediaQuery;
+  static Size screenSize;
+  static double width, height;
+  static double block;
+  static double hBox = 100.0, vBox;
 
-  Query(BuildContext context) {
+  static void loadAll(BuildContext context) {
     mediaQuery = MediaQuery.of(context);
     screenSize = mediaQuery.size;
     width = screenSize.width;

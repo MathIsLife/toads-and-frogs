@@ -18,7 +18,7 @@ int who = 1; //player
 class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
-    Query q = Query(context);
+    double block = Query.block;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -30,7 +30,7 @@ class _GameScreenState extends State<GameScreen> {
         child: Column(
           children: <Widget>[
             SizedBox(
-              height: q.block * 2,
+              height: block * 2,
             ),
             Padding(
               padding: const EdgeInsets.all(20.0),
@@ -55,11 +55,11 @@ class _GameScreenState extends State<GameScreen> {
 class ScoreWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Query q = Query(context);
+    double block = Query.block;
     final Score scr = Provider.of<Score>(context);
     return Text(
       'Hops: Frog: ${scr.frogHop}, Toad: ${scr.toadHop}',
-      style: TextStyle(fontSize: q.block * 5, color: Colors.white),
+      style: TextStyle(fontSize: block * 5, color: Colors.white),
     );
   }
 }

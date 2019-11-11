@@ -37,8 +37,8 @@ class _LevelPageState extends State<LevelPage> {
               ),
             ),
             Container(
-              width: Query(context).width,
-              height: Query(context).height - 95.0,
+              width: Query.width,
+              height: Query.height - 95.0,
               child: GridView.builder(
                 physics: BouncingScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
