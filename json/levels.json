@@ -1,172 +1,170 @@
-{
-  "levels" : [
-    {
-      "level": 1,
-      "diff": "easy",
-      "toads" : 2,
-      "frogs" : 4,
-      "leafs" : 8,
-      "firstMove" : "user"
-    },
-    {
-      "level": 2,
-      "diff": "hard",
-      "toads": 2,
-      "frogs": 3,
-      "leafs": 8,
-      "firstMove": "user"
-    },
-    {
-      "level": 3,
-      "diff": "hard",
-      "toads": 2,
-      "frogs": 2,
-      "leafs": 8,
-      "firstMove": "user"
-    },
-    {
-      "level": 4,
-      "diff": "hard",
-      "toads": 2,
-      "frogs": 2,
-      "leafs": 8,
-      "firstMove": "comp"
-    },
-    {
-      "level": 5,
-      "diff": "easy",
-      "toads": 2,
-      "frogs": 3,
-      "leafs": 9,
-      "firstMove": "user"
-    },
-    {
-      "level": 6,
-      "diff": "hard",
-      "toads": 2,
-      "frogs": 3,
-      "leafs": 9,
-      "firstMove": "comp"
-    },
-    {
-      "level": 7,
-      "diff": "hard",
-      "toads": 3,
-      "frogs": 2,
-      "leafs": 8,
-      "firstMove": "user"
-    },
-    {
-      "level": 8,
-      "diff": "hard",
-      "toads": 3,
-      "frogs": 2,
-      "leafs": 9,
-      "firstMove": "comp"
-    },
-    {
-      "level": 9,
-      "diff": "easy",
-      "toads": 2,
-      "frogs": 3,
-      "leafs": 10,
-      "firstMove": "user"
-    },
-    {
-      "level": 10,
-      "diff": "easy",
-      "toads": 3,
-      "frogs": 3,
-      "leafs": 10,
-      "firstMove": "user"
-    },
-    {
-      "level": 11,
-      "diff": "hard",
-      "toads": 3,
-      "frogs": 3,
-      "leafs": 10,
-      "firstMove": "comp"
-    },
-    {
-      "level": 12,
-      "diff": "hard",
-      "toads": 3,
-      "frogs": 2,
-      "leafs": 10,
-      "firstMove": "user"
-    },
-    {
-      "level": 13,
-      "diff": "hard",
-      "toads": 3,
-      "frogs": 2,
-      "leafs": 10,
-      "firstMove": "comp"
-    },
-    {
-      "level": 14,
-      "diff": "easy",
-      "toads": 3,
-      "frogs": 3,
-      "leafs": 12,
-      "firstMove": "user"
-    },
-    {
-      "level": 15,
-      "diff": "hard",
-      "toads": 3,
-      "frogs": 3,
-      "leafs": 12,
-      "firstMove": "comp"
-    },
-    {
-      "level": 16,
-      "diff": "hard",
-      "toads": 3,
-      "frogs": 2,
-      "leafs": 12,
-      "firstMove": "comp"
-    },
-    {
-      "level": 17,
-      "diff": "easy",
-      "toads": 3,
-      "frogs": 4,
-      "leafs": 13,
-      "firstMove": "user"
-    },
-    {
-      "level": 18,
-      "diff": "hard",
-      "toads": 3,
-      "frogs": 4,
-      "leafs": 13,
-      "firstMove": "comp"
-    },
-    {
-      "level": 19,
-      "diff": "hard",
-      "toads": 4,
-      "frogs": 4,
-      "leafs": 13,
-      "firstMove": "comp"
-    },
-    {
-      "level": 20,
-      "diff": "hard",
-      "toads": 3,
-      "frogs": 3,
-      "leafs": 14,
-      "firstMove": "user"
-    },
-    {
-      "level": 21,
-      "diff": "hard",
-      "toads": 3,
-      "frogs": 3,
-      "leafs": 14,
-      "firstMove": "comp"
-    }
-  ]
-}
+[
+  {
+    "level": 1,
+    "diff": "easy",
+    "toads": 2,
+    "frogs": 4,
+    "leafs": 8,
+    "firstMove": "user"
+  },
+  {
+    "level": 2,
+    "diff": "hard",
+    "toads": 2,
+    "frogs": 3,
+    "leafs": 8,
+    "firstMove": "user"
+  },
+  {
+    "level": 3,
+    "diff": "hard",
+    "toads": 2,
+    "frogs": 2,
+    "leafs": 8,
+    "firstMove": "user"
+  },
+  {
+    "level": 4,
+    "diff": "hard",
+    "toads": 2,
+    "frogs": 2,
+    "leafs": 8,
+    "firstMove": "comp"
+  },
+  {
+    "level": 5,
+    "diff": "easy",
+    "toads": 2,
+    "frogs": 3,
+    "leafs": 9,
+    "firstMove": "user"
+  },
+  {
+    "level": 6,
+    "diff": "hard",
+    "toads": 2,
+    "frogs": 3,
+    "leafs": 9,
+    "firstMove": "comp"
+  },
+  {
+    "level": 7,
+    "diff": "hard",
+    "toads": 3,
+    "frogs": 2,
+    "leafs": 8,
+    "firstMove": "user"
+  },
+  {
+    "level": 8,
+    "diff": "hard",
+    "toads": 3,
+    "frogs": 2,
+    "leafs": 9,
+    "firstMove": "comp"
+  },
+  {
+    "level": 9,
+    "diff": "easy",
+    "toads": 2,
+    "frogs": 3,
+    "leafs": 10,
+    "firstMove": "user"
+  },
+  {
+    "level": 10,
+    "diff": "easy",
+    "toads": 3,
+    "frogs": 3,
+    "leafs": 10,
+    "firstMove": "user"
+  },
+  {
+    "level": 11,
+    "diff": "hard",
+    "toads": 3,
+    "frogs": 3,
+    "leafs": 10,
+    "firstMove": "comp"
+  },
+  {
+    "level": 12,
+    "diff": "hard",
+    "toads": 3,
+    "frogs": 2,
+    "leafs": 10,
+    "firstMove": "user"
+  },
+  {
+    "level": 13,
+    "diff": "hard",
+    "toads": 3,
+    "frogs": 2,
+    "leafs": 10,
+    "firstMove": "comp"
+  },
+  {
+    "level": 14,
+    "diff": "easy",
+    "toads": 3,
+    "frogs": 3,
+    "leafs": 12,
+    "firstMove": "user"
+  },
+  {
+    "level": 15,
+    "diff": "hard",
+    "toads": 3,
+    "frogs": 3,
+    "leafs": 12,
+    "firstMove": "comp"
+  },
+  {
+    "level": 16,
+    "diff": "hard",
+    "toads": 3,
+    "frogs": 2,
+    "leafs": 12,
+    "firstMove": "comp"
+  },
+  {
+    "level": 17,
+    "diff": "easy",
+    "toads": 3,
+    "frogs": 4,
+    "leafs": 13,
+    "firstMove": "user"
+  },
+  {
+    "level": 18,
+    "diff": "hard",
+    "toads": 3,
+    "frogs": 4,
+    "leafs": 13,
+    "firstMove": "comp"
+  },
+  {
+    "level": 19,
+    "diff": "hard",
+    "toads": 4,
+    "frogs": 4,
+    "leafs": 13,
+    "firstMove": "comp"
+  },
+  {
+    "level": 20,
+    "diff": "hard",
+    "toads": 3,
+    "frogs": 3,
+    "leafs": 14,
+    "firstMove": "user"
+  },
+  {
+    "level": 21,
+    "diff": "hard",
+    "toads": 3,
+    "frogs": 3,
+    "leafs": 14,
+    "firstMove": "comp"
+  }
+]

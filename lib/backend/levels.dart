@@ -22,7 +22,7 @@ class Level {
 
 class LevelData {
   static List<Level> levels = List<Level>();
-  static Map<String, dynamic> data;
+  static var data;
   static List<Map<String, dynamic>> levelData = List<Map<String, dynamic>>();
 
   static Future loadJSON() async {
@@ -34,7 +34,7 @@ class LevelData {
     final jsonRespone = await json.decode(jsonString);
     data = jsonRespone;
     for (int i = 0; i < 20; i++) {
-      levelData.add(data['levels'][i]);
+      levelData.add(data[i]);
     }
     for (int i = 0; i < 20; i++) {
       levels.add(Level.fromMap(levelData[i]));
