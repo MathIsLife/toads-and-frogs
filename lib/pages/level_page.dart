@@ -16,13 +16,15 @@ class LevelPage extends StatefulWidget {
 class _LevelPageState extends State<LevelPage> {
   @override
   Widget build(BuildContext context) {
+    double hr = Query.heightRatio, wr = Query.widthRatio;
+
     return MaterialApp(
       home: Scaffold(
         body: Column(
           children: <Widget>[
             
             Container(
-              height: 90.0,
+              height: 90.0 * hr,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Center(
@@ -38,7 +40,7 @@ class _LevelPageState extends State<LevelPage> {
             ),
             Container(
               width: Query.width,
-              height: Query.height - 95.0,
+              height: Query.height - 95.0 * hr,
               child: GridView.builder(
                 physics: BouncingScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -63,8 +65,8 @@ class LevelTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 30,
-      height: 30,
+      width: 30 * Query.widthRatio,
+      height: 30 * Query.heightRatio,
       margin: EdgeInsets.all(20.0),
       decoration: BoxDecoration(
         border: Border.all(width: 3.0, color: Colors.amber),
@@ -79,7 +81,7 @@ class LevelTile extends StatelessWidget {
         shape: CircleBorder(),
         child: Text(
           '${level.level}',
-          style: TextStyle(color: Colors.black87, fontSize: 30.0),
+          style: TextStyle(color: Colors.black87, fontSize: 4 * Query.block),
         ),
         onPressed: () {
           Navigator.push(

@@ -23,9 +23,10 @@ class _GameScreenState extends State<GameScreen> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage(kiBg1),
-              fit: BoxFit.fitHeight,
-              alignment: Alignment.center),
+            image: Image.asset(kiBg1).image,
+            fit: BoxFit.fitHeight,
+            alignment: Alignment.bottomLeft,
+          ),
         ),
         child: Column(
           children: <Widget>[

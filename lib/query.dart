@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toads_and_frogs/constants.dart';
 
 class Query {
   static var mediaQuery;
@@ -6,6 +7,8 @@ class Query {
   static double width, height;
   static double block;
   static double hBox = 100.0, vBox;
+  static double heightRatio = height / nexusHeight;
+  static double widthRatio = width / nexusWidth;
 
   static void loadAll(BuildContext context) {
     mediaQuery = MediaQuery.of(context);
@@ -13,6 +16,6 @@ class Query {
     width = screenSize.width;
     height = screenSize.height;
     block = width / hBox;
-    vBox = height/ block;
+    vBox = height / block;
   }
 }

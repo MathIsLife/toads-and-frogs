@@ -38,6 +38,8 @@ class _GameResultState extends State<GameResult> {
     winner = getWinner();
     
     double block = Query.block;
+    double hr = Query.heightRatio;
+    double wr = Query.widthRatio;
 
     return Scaffold(
       body: Scaffold(
@@ -46,8 +48,8 @@ class _GameResultState extends State<GameResult> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
-                height: 50.0,
-                width: 50.0 * widget.list.length,
+                height: 50.0 * hr,
+                width: 50.0 * widget.list.length * wr,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: widget.list.length,
@@ -59,7 +61,7 @@ class _GameResultState extends State<GameResult> {
                 ),
               ),
               SizedBox(
-                height: 40.0,
+                height: 40.0 * hr,
               ),
               Container(
                 child: Text(
@@ -71,7 +73,7 @@ class _GameResultState extends State<GameResult> {
                 ),
               ),
               SizedBox(
-                height: 20.0,
+                height: 20.0 * hr,
               ),
               RaisedButton(
                 
@@ -81,8 +83,8 @@ class _GameResultState extends State<GameResult> {
                 ),
                 color: Colors.amber,
                 child: Container(
-                  width: 200,
-                  height: 50,
+                  width: 200 * wr,
+                  height: 50 * hr,
                   child: Center(
                     child: Text(
                       'New Game',
@@ -136,8 +138,8 @@ class ResTile extends StatelessWidget {
           shape: BoxShape.circle,
           border: Border.all(width: 3.0, color: Colors.black54),
         ),
-        width: 50.0,
-        height: 50.0,
+        width: 50.0 * Query.widthRatio,
+        height: 50.0 * Query.heightRatio,
         child: Padding(
           padding: const EdgeInsets.all(5.0),
           child: getAvatar(av),

@@ -36,17 +36,23 @@ class Tile extends StatelessWidget {
         return Container();
     }
   }
+
   Future<void> gotoResult(context) async {
     var gc = Provider.of<GameController>(context, listen: false);
     Future.delayed(Duration(seconds: 2), () {
       if (gc.gameState != GameController.CONTINUE_GAME) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => GameResult(whoWon: gc.gameState, list: gc.list,),
-        ),
-      );
-    } 
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => GameResult(
+              whoWon: gc.gameState,
+              list: gc.list,
+            ),
+          ),
+        );
+        gc.dispose();
+        Provider.of<Score>(context).dispose();
+      }
     });
   }
   @override
