@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:toads_and_frogs/backend/enums.dart';
 import 'package:toads_and_frogs/constants.dart';
@@ -34,74 +36,115 @@ class _GameResultState extends State<GameResult> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     winner = getWinner();
-    
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     double block = Query.block;
     double hr = Query.heightRatio;
     double wr = Query.widthRatio;
 
     return Scaffold(
-      body: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                height: 50.0 * hr,
-                width: 50.0 * widget.list.length * wr,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: widget.list.length,
-                  itemBuilder: (context, i) {
-                    return ResTile(
-                      av: widget.list[i],
-                    );
-                  },
-                ),
+      body: Stack(
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(kiBg2),
+                fit: BoxFit.fitHeight,
+                alignment: Alignment.bottomLeft,
               ),
-              SizedBox(
-                height: 40.0 * hr,
-              ),
-              Container(
-                child: Text(
-                  winner,
-                  style: TextStyle(
-                    color: resColor,
-                    fontSize: block * 8,
+            ),
+          ),
+          BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(
+              color: Colors.black.withOpacity(0),
+            ),
+          ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  height: 50.0 * hr,
+                  width: 50.0 * widget.list.length * wr,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: widget.list.length,
+                    itemBuilder: (context, i) {
+                      return ResTile(
+                        av: widget.list[i],
+                      );
+                    },
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 20.0 * hr,
-              ),
-              RaisedButton(
-                
-                elevation: 20.0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+                SizedBox(
+                  height: 40.0 * hr,
                 ),
-                color: Colors.amber,
-                child: Container(
-                  width: 200 * wr,
-                  height: 50 * hr,
-                  child: Center(
-                    child: Text(
-                      'New Game',
-                      style: TextStyle(fontSize: 30.0),
+                Container(
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    elevation: 20,
+                    margin: EdgeInsets.all(8.0),
+                    color: resColor,
+                    child: Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Text(
+                        winner,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: block * 5,
+                          shadows: <Shadow>[
+                            Shadow(
+                              offset: Offset(3.0, 3.0),
+                              blurRadius: 5.0,
+                              color: Colors.black,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => LevelPage()),
-                  );
-                },
-              )
-            ],
+                SizedBox(
+                  height: 20.0 * hr,
+                ),
+                RaisedButton(
+                  elevation: 20.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  color: Colors.orange,
+                  child: Container(
+                    width: 200 * wr,
+                    height: 50 * hr,
+                    child: Center(
+                      child: Text(
+                        'New Game',
+                        style: TextStyle(
+                          fontSize: Query.block * 3.5,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => LevelPage()),
+                    );
+                  },
+                )
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -134,15 +177,16 @@ class ResTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
+      decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(width: 3.0, color: Colors.black54),
-        ),
-        width: 50.0 * Query.widthRatio,
-        height: 50.0 * Query.heightRatio,
-        child: Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: getAvatar(av),
-        ));
+          border: Border.all(width: 3.0, color: Colors.white54),
+          color: Colors.white54),
+      width: 50.0 * Query.widthRatio,
+      height: 50.0 * Query.heightRatio,
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: getAvatar(av),
+      ),
+    );
   }
 }

@@ -64,7 +64,21 @@ class ScoreWidget extends StatelessWidget {
     final Score scr = Provider.of<Score>(context);
     return Text(
       'Hops: Frog: ${scr.frogHop}, Toad: ${scr.toadHop}',
-      style: TextStyle(fontSize: block * 5, color: Colors.white),
+      style: TextStyle(
+        fontSize: block * 5,
+        color: Colors.white,
+        shadows: <Shadow>[
+          Shadow(
+            offset: Offset(3.0, 3.0),
+            blurRadius: 3.0,
+            color: Colors.grey,
+          ),
+          Shadow(
+            blurRadius: 8.0,
+            color: Colors.black,
+          ),
+        ],
+      ),
     );
   }
 }

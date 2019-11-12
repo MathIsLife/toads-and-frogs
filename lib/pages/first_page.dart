@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toads_and_frogs/buttons/round_button.dart';
+import 'package:toads_and_frogs/constants.dart';
 import 'package:toads_and_frogs/query.dart';
 import 'level_page.dart';
 
@@ -11,12 +12,15 @@ class FirstPage extends StatefulWidget {
 
 class _FirstState extends State<FirstPage> {
   bool isLoadGame = false;
-   @override
+  @override
   Widget build(BuildContext context) {
     Query.loadAll(context);
     double block = Query.block;
     return Scaffold(
       body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(image: AssetImage(kiBg4), fit: BoxFit.fill),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -27,6 +31,18 @@ class _FirstState extends State<FirstPage> {
                 style: TextStyle(
                   color: Colors.amber,
                   fontSize: block * 9.0,
+                  shadows: <Shadow>[
+                    Shadow(
+                      offset: Offset(3.0, 3.0),
+                      blurRadius: 3.0,
+                      color: Colors.black,
+                    ),
+                    Shadow(
+                     
+                      blurRadius: 8.0,
+                      color: Colors.white,
+                    ),
+                  ],
                 ),
               ),
             ),

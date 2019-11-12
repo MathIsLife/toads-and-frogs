@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toads_and_frogs/backend/game_controller.dart';
@@ -5,6 +7,7 @@ import 'package:toads_and_frogs/backend/levels.dart';
 import 'package:toads_and_frogs/backend/score.dart';
 import 'package:toads_and_frogs/query.dart';
 
+import '../constants.dart';
 import 'game_screen.dart';
 
 class LevelPage extends StatefulWidget {
@@ -20,36 +23,59 @@ class _LevelPageState extends State<LevelPage> {
 
     return MaterialApp(
       home: Scaffold(
-        body: Column(
+        body: Stack(
           children: <Widget>[
-            
             Container(
-              height: 90.0 * hr,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Text(
-                    'Select a level you wish to play!',
-                    style: TextStyle(
-                      color: Colors.black87,
-                      fontSize: 30.0
-                    ),
-                  ),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(kiBg2),
+                  fit: BoxFit.fitHeight,
+                  alignment: Alignment.bottomLeft,
                 ),
               ),
             ),
-            Container(
-              width: Query.width,
-              height: Query.height - 95.0 * hr,
-              child: GridView.builder(
-                physics: BouncingScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 5),
-                itemCount: 20,
-                itemBuilder: (context, index) {
-                  return LevelTile(level: LevelData.levels[index]);
-                },
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+              child: Container(
+                color: Colors.black.withOpacity(0),
               ),
+            ),
+            Column(
+              children: <Widget>[
+                // Container(
+                //   height: 60.0 * hr,
+                //   child: Padding(
+                //     padding: const EdgeInsets.all(8.0),
+                //     child: Center(
+                //       child: Text(
+                //         'Select a level you wish to play!',
+                //         style: TextStyle(
+                //           color: Colors.white,
+                //           fontSize: Query.block * 4,
+                //           fontWeight: FontWeight.w600,
+                //           letterSpacing: 2,
+
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                Center(
+                  child: Container(
+                    width: Query.width - 100.0,
+                    height: Query.height, //- 95.0 * hr
+                    child: GridView.builder(
+                      physics: BouncingScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 5),
+                      itemCount: 20,
+                      itemBuilder: (context, index) {
+                        return LevelTile(level: LevelData.levels[index]);
+                      },
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -81,7 +107,7 @@ class LevelTile extends StatelessWidget {
         shape: CircleBorder(),
         child: Text(
           '${level.level}',
-          style: TextStyle(color: Colors.black87, fontSize: 4 * Query.block),
+          style: TextStyle(color: Colors.black, fontSize: 4 * Query.block),
         ),
         onPressed: () {
           Navigator.push(

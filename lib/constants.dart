@@ -1,10 +1,10 @@
 const kiLeaf = 'assets/images/leaf.png';
 const kiLeaf2 = 'assets/images/leaf2.png';
 const kiFrog = 'assets/images/frog.png';
-const kiFrog2 = 'assets/images/frog2.png';
-const kiToad2 = 'assets/images/toad2.png';
 const kiToad = 'assets/images/toad.png';
 const kiBg1 = 'assets/images/bg1.png';
 const kiBg2 = 'assets/images/bg2.png';
+const kiBg3 = 'assets/images/bg3.png';
+const kiBg4 = 'assets/images/bg4.png';
 const nexusHeight = 411.42857142857144; // height of the emulator I worked with
 const nexusWidth = 731.4285714285714; //  same 
