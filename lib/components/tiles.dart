@@ -73,7 +73,7 @@ class Tile extends StatelessWidget {
             //   borderRadius: BorderRadius.circular(20.0),
             // ),
             child: Image(
-              image: AssetImage(kiLeaf),
+              image: AssetImage(kiLeaf2),
             ),
           ),
           GestureDetector(

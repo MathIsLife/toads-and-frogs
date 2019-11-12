@@ -25,7 +25,7 @@ class _GameScreenState extends State<GameScreen> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: FadeInImage(
-              image: AssetImage(kiBg1),
+              image: AssetImage(kiBg2),
               placeholder: MemoryImage(kTransparentImage),
             ).image,
             fit: BoxFit.fitHeight,
