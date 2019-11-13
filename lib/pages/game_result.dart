@@ -10,9 +10,9 @@ import 'level_page.dart';
 class GameResult extends StatefulWidget {
   static final route = '/game_result';
 
-  final int whoWon;
+  final int whoWon, gametype; // 1 -> single 2 -> multi
   final List<TileAvatar> list;
-  GameResult({this.whoWon, this.list});
+  GameResult({this.whoWon, this.list, this.gametype = 1});
 
   @override
   _GameResultState createState() => _GameResultState();
@@ -21,6 +21,8 @@ class GameResult extends StatefulWidget {
 class _GameResultState extends State<GameResult> {
   String aiWon = "Android Wins!";
   String uWon = "You Win!";
+  String frogWon = 'Frog Wins!';
+  String toadWon = 'Toad Wins!';
   String winner;
   Color resColor;
 
@@ -32,7 +34,14 @@ class _GameResultState extends State<GameResult> {
       resColor = Colors.red;
       return aiWon;
     }
-    return 'ehhe';
+    else if (widget.whoWon == 3) {
+      resColor = Colors.lime;
+      return frogWon;
+    }
+    else {
+      resColor = Colors.brown;
+      return toadWon;
+    }
   }
 
   @override
