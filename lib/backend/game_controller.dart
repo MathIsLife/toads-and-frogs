@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:provider/provider.dart';
+import 'package:path/path.dart';
 import 'package:toads_and_frogs/backend/enums.dart';
 import 'package:toads_and_frogs/backend/score.dart';
 import 'package:toads_and_frogs/pages/game_screen.dart';
@@ -18,7 +18,7 @@ class GameController extends ChangeNotifier {
 
   List<TileAvatar> _avatarList = List<TileAvatar>();
 
-  bool hasUser, hasComp, userFirst;
+  bool hasUser = false, hasComp = true, userFirst;
 
   GameController({
     this.gameDifficulty = HARD,
@@ -34,7 +34,6 @@ class GameController extends ChangeNotifier {
     SIZE = leafs;
     
     for (int i = 0; i < frogs; i++) _avatarList.add(TileAvatar.frog);
-
     for (int i = 0; i < leafs - toads - frogs; ++i) {
       _avatarList.add(TileAvatar.empty);
     }
@@ -57,7 +56,10 @@ class GameController extends ChangeNotifier {
   int getAvatarListLength() {
     return _avatarList.length;
   }
-
+  String turn () {
+    if (hasComp && !hasUser) return 'Your Turn';
+    return 'Android\'s Turn';
+  }
   TileAvatar avatarAt(int i) => _avatarList[i];
 
   void setAvatarAt(int i, TileAvatar val) {
@@ -193,6 +195,8 @@ class GameController extends ChangeNotifier {
     TileAvatar tmp = _avatarList[oth];
     _avatarList[oth] = _avatarList[pos];
     _avatarList[pos] = tmp;
+    if (abs(oth - pos) == 2) toadHop = true;
+
     for (int i = 0; i < SIZE - 1; ++i) {
       if (_avatarList[i] == TileAvatar.frog) {
         if (_avatarList[i + 1] == TileAvatar.empty) {
@@ -207,6 +211,9 @@ class GameController extends ChangeNotifier {
     who = 2;
     return COMPUTER_WON;
   }
+
+  int abs(int a) { return (a < 0) ? -a:a;}
+  bool toadHop = false;
 
   void onDoubleTapped(int index, Score scr) {
     int cur = index, prev = index - 1, next = index + 1;
@@ -231,6 +238,7 @@ class GameController extends ChangeNotifier {
       if (hasUser && !hasComp) {
         Future.delayed(Duration(seconds: 1), () {
           gameState = computerMove();
+          if (toadHop) {scr.incrementHop(TileAvatar.toad);toadHop = false;}
           notifyListeners();
           hasComp = true;
           hasUser = false;

@@ -146,7 +146,7 @@ class _GameResultState extends State<GameResult> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => LevelPage()),
+                      MaterialPageRoute(builder: (_) => LevelPage(gameplay: widget.gametype,)),
                     );
                   },
                 )

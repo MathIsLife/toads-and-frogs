@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toads_and_frogs/backend/game_controller.dart';
 import 'package:toads_and_frogs/backend/levels.dart';
+import 'package:toads_and_frogs/backend/multi_controller.dart';
 import 'package:toads_and_frogs/backend/score.dart';
 import 'package:toads_and_frogs/query.dart';
 
@@ -11,6 +12,8 @@ import '../constants.dart';
 import 'game_screen.dart';
 
 class LevelPage extends StatefulWidget {
+  final int gameplay;
+  LevelPage({this.gameplay}) {print('$gameplay yo wtf');}
   static final route = '/level_page';
   @override
   _LevelPageState createState() => _LevelPageState();
@@ -70,7 +73,7 @@ class _LevelPageState extends State<LevelPage> {
                           crossAxisCount: 5),
                       itemCount: 20,
                       itemBuilder: (context, index) {
-                        return LevelTile(level: LevelData.levels[index]);
+                        return LevelTile(level: LevelData.levels[index], gamePlay: widget.gameplay,);
                       },
                     ),
                   ),
@@ -86,7 +89,61 @@ class _LevelPageState extends State<LevelPage> {
 
 class LevelTile extends StatelessWidget {
   final Level level;
-  LevelTile({this.level});
+  final gamePlay;
+  LevelTile({this.level, this.gamePlay = 1});
+
+  void gotoGame(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return MultiProvider(
+            providers: [
+              ChangeNotifierProvider(
+                builder: (context) => GameController(
+                  gameDifficulty: level.difficulty,
+                  frogs: level.frogs,
+                  leafs: level.leafs,
+                  toads: level.toads,
+                  userFirst: level.userFirst,
+                ),
+              ),
+              ChangeNotifierProvider(
+                builder: (context) => Score(),
+              )
+            ],
+            child: GameScreen(),
+          );
+        },
+      ),
+    );
+  }
+
+  void gotoGameMul(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return MultiProvider(
+            providers: [
+              ChangeNotifierProvider(
+                builder: (context) => MultiGameController(
+                  frogFirst: level.userFirst,
+                  frogs: level.frogs,
+                  leafs: level.leafs,
+                  toads: level.toads,
+                ),
+              ),
+              ChangeNotifierProvider(
+                builder: (context) => Score(),
+              )
+            ],
+            child: GameScreen(gameplay: gamePlay,),
+          );
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,30 +167,12 @@ class LevelTile extends StatelessWidget {
           style: TextStyle(color: Colors.black, fontSize: 4 * Query.block),
         ),
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return MultiProvider(
-                  providers: [
-                    ChangeNotifierProvider(
-                      builder: (context) => GameController(
-                        gameDifficulty: level.difficulty,
-                        frogs: level.frogs,
-                        leafs: level.leafs,
-                        toads: level.toads,
-                        userFirst: level.userFirst,
-                      ),
-                    ),
-                    ChangeNotifierProvider(
-                      builder: (context) => Score(),
-                    )
-                  ],
-                  child: GameScreen(),
-                );
-              },
-            ),
-          );
+          print('$gamePlay wtf');
+          if (gamePlay == 1) {
+            gotoGame(context);
+          } else {
+            gotoGameMul(context);
+          }
         },
       ),
     );

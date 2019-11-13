@@ -38,7 +38,6 @@ class _FirstState extends State<FirstPage> {
                       color: Colors.black,
                     ),
                     Shadow(
-                     
                       blurRadius: 8.0,
                       color: Colors.white,
                     ),
@@ -48,7 +47,14 @@ class _FirstState extends State<FirstPage> {
             ),
             RoundButton(
               onPressed: () {
-                Navigator.pushNamed(context, LevelPage.route);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => LevelPage(
+                      gameplay: 1,
+                    ),
+                  ),
+                );
               },
               tooltip: 'New Game',
               icon: Icon(
@@ -76,7 +82,15 @@ class _FirstState extends State<FirstPage> {
                 ),
                 RoundButton(
                   onPressed: () {
-                    print("Multiplayer");
+                    print('multi');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => LevelPage(
+                          gameplay: 2,
+                        ),
+                      ),
+                    );
                   },
                   tooltip: 'Multiplayer',
                   icon: Icon(

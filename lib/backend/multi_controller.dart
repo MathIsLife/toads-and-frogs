@@ -48,7 +48,7 @@ class MultiGameController extends ChangeNotifier {
   int whoWon() {
     int hasToadWon = 1;
     int hasFrogWon = 1;
-    for (int i = 0; i <= leafs; i++) {
+    for (int i = 0; i < leafs; i++) {
       int cur = i, prev = i - 1, next = i + 1;
       if (list[cur] == TileAvatar.frog && next < list.length) {
         if (list[next] == TileAvatar.empty) {
@@ -79,6 +79,10 @@ class MultiGameController extends ChangeNotifier {
     }
   }
 
+  String turn () {
+    if (hasToad && !hasFrog) return 'Frog\'s Turn';
+    else return 'Toad\'s Turn';
+  }
   void onDoubleTapped(int index, Score scr) {
     int cur = index, prev = index - 1, next = index + 1;
     if (hasToad &&
@@ -99,13 +103,18 @@ class MultiGameController extends ChangeNotifier {
           setAvatarAt(next + 1, TileAvatar.frog);
         }
       }
-    } else if (list[cur] == TileAvatar.toad && prev >= 0) {
+    } else if (!hasToad &&
+        hasFrog && list[cur] == TileAvatar.toad && prev >= 0) {
       if (list[prev] == TileAvatar.empty) {
+        hasFrog = false;
+        hasToad = true;
         setAvatarAt(cur, TileAvatar.empty);
         setAvatarAt(prev, TileAvatar.toad);
       } else if (list[prev] == TileAvatar.frog &&
           prev - 1 >= 0 &&
           list[prev - 1] == TileAvatar.empty) {
+        hasFrog = false;
+        hasToad = true;
         scr.incrementHop(TileAvatar.toad);
         setAvatarAt(cur, TileAvatar.empty);
         setAvatarAt(prev - 1, TileAvatar.toad);
