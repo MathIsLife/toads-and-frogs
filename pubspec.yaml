@@ -28,6 +28,9 @@ dependencies:
   flame: ^0.10.2
   provider: any
   transparent_image: ^1.0.0
+  path_provider: any
+  path: any
+  sqflite: any
 
 dev_dependencies:
   flutter_test:

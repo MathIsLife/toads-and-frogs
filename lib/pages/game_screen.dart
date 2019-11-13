@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:provider/provider.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:toads_and_frogs/backend/game_controller.dart';
 import 'package:toads_and_frogs/backend/score.dart';
 import 'package:toads_and_frogs/components/tile_map.dart';
@@ -17,6 +19,11 @@ class GameScreen extends StatefulWidget {
 int who = 1; //player
 
 class _GameScreenState extends State<GameScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     double block = Query.block;
