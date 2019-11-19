@@ -13,7 +13,7 @@ class GameScreen extends StatefulWidget {
   static String route = '/game_screen';
   final int gameplay;
   GameScreen({this.gameplay = 1}) {
-    print(gameplay);
+    //print(gameplay);
   }
   @override
   _GameScreenState createState() => _GameScreenState();

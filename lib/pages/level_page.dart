@@ -13,7 +13,9 @@ import 'game_screen.dart';
 
 class LevelPage extends StatefulWidget {
   final int gameplay;
-  LevelPage({this.gameplay}) {print('$gameplay yo wtf');}
+  LevelPage({this.gameplay}) {
+    //print('$gameplay yo wtf');
+  }
   static final route = '/level_page';
   @override
   _LevelPageState createState() => _LevelPageState();
@@ -112,7 +114,7 @@ class LevelTile extends StatelessWidget {
                 builder: (context) => Score(),
               )
             ],
-            child: GameScreen(),
+            child: GameScreen(gameplay: 1,),
           );
         },
       ),
@@ -167,7 +169,7 @@ class LevelTile extends StatelessWidget {
           style: TextStyle(color: Colors.black, fontSize: 4 * Query.block),
         ),
         onPressed: () {
-          print('$gamePlay wtf');
+          print('$gamePlay from leveltile');
           if (gamePlay == 1) {
             gotoGame(context);
           } else {

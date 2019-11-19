@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:path/path.dart';
 import 'package:toads_and_frogs/backend/enums.dart';
 import 'package:toads_and_frogs/backend/score.dart';
 import 'package:toads_and_frogs/pages/game_screen.dart';

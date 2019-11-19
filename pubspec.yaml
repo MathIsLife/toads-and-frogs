@@ -31,6 +31,7 @@ dependencies:
   path_provider: any
   path: any
   sqflite: any
+  matrix_gesture_detector: any
 
 dev_dependencies:
   flutter_test:
@@ -42,6 +43,10 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  fonts:
+    - family: 'Indie Flower'
+      fonts:
+        - asset: assets/fonts/IndieFlower-Regular.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
