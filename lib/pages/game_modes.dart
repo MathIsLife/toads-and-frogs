@@ -1,11 +1,15 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:toads_and_frogs/backend/challenge_controller.dart';
 import 'package:toads_and_frogs/constants.dart';
+import 'package:toads_and_frogs/pages/challenge_screen.dart';
 import 'package:toads_and_frogs/pages/level_page.dart';
 import 'package:toads_and_frogs/query.dart';
 
 class GameMode extends StatefulWidget {
+  static String route = '/gamemode';
   @override
   _GameModeState createState() => _GameModeState();
 }
@@ -84,7 +88,10 @@ class _GameModeState extends State<GameMode> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) {
-                        return LevelPage(gameplay: 3);
+                        return ChangeNotifierProvider(
+                          builder: (_) => GameControl(),
+                          child: ChallengeScreen(),
+                        );
                       }),
                     );
                   },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toads_and_frogs/buttons/round_button.dart';
 import 'package:toads_and_frogs/constants.dart';
+import 'package:toads_and_frogs/pages/game_modes.dart';
 import 'package:toads_and_frogs/query.dart';
 import 'level_page.dart';
 
@@ -50,9 +51,7 @@ class _FirstState extends State<FirstPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => LevelPage(
-                      gameplay: 1,
-                    ),
+                    builder: (_) => GameMode()
                   ),
                 );
               },

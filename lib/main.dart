@@ -7,7 +7,6 @@ import 'package:sqflite/sqflite.dart';
 import 'package:toads_and_frogs/backend/levels.dart';
 import 'package:toads_and_frogs/pages/first_page.dart';
 import 'package:toads_and_frogs/pages/game_modes.dart';
-import 'package:toads_and_frogs/pages/init_config.dart';
 import 'package:toads_and_frogs/pages/level_page.dart';
 import 'constants.dart';
 
@@ -17,19 +16,7 @@ Future main() async {
     [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight],
   );
   LevelData.loadData(); // gotta initialize once
-  final Future<Database> database = openDatabase(
-    path.join(await getDatabasesPath(), 'score.db'),
-  );
-  Widget getApp() {
-    return MaterialApp(
-      initialRoute: '/',
-      routes: {
-        FirstPage.route: (context) => FirstPage(),
-        InitConfig.route: (context) => InitConfig(),
-        LevelPage.route: (context) => LevelPage(),
-      },
-    );
-  }
+  
 
   runApp(MyApp());
 }
@@ -45,15 +32,12 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: GameMode(),
+      home: FirstPage(),
     );
   }
 
   @override
   void initState() {
-    // Schedule a microtask that warms up the image cache with all of the style
-    // sphinx images. This will run after the build method is executed, but
-    // before the style sphinx is displayed.
     scheduleMicrotask(() {
       precacheImage(AssetImage(kiBg4), context);
       precacheImage(AssetImage(kiBg1), context);

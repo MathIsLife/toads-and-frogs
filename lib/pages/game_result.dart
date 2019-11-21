@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:toads_and_frogs/backend/enums.dart';
 import 'package:toads_and_frogs/constants.dart';
+import 'package:toads_and_frogs/pages/first_page.dart';
+import 'package:toads_and_frogs/pages/game_modes.dart';
 import 'package:toads_and_frogs/query.dart';
 
 import 'level_page.dart';
@@ -33,12 +35,10 @@ class _GameResultState extends State<GameResult> {
     } else if (widget.whoWon == 2) {
       resColor = Colors.red;
       return aiWon;
-    }
-    else if (widget.whoWon == 3) {
+    } else if (widget.whoWon == 3) {
       resColor = Colors.lime;
       return frogWon;
-    }
-    else {
+    } else {
       resColor = Colors.brown;
       return toadWon;
     }
@@ -144,10 +144,11 @@ class _GameResultState extends State<GameResult> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => LevelPage(gameplay: widget.gametype,)),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (_) => LevelPage(gameplay: widget.gametype,)),
+                    // );
+                    Navigator.popUntil(context, ModalRoute.withName('/'));
                   },
                 )
               ],

@@ -10,7 +10,7 @@ import 'package:toads_and_frogs/query.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class GameScreen extends StatefulWidget {
-  static String route = '/game_screen';
+  static String route = '/gamemode/level_page/game_screen';
   final int gameplay;
   GameScreen({this.gameplay = 1}) {
     //print(gameplay);

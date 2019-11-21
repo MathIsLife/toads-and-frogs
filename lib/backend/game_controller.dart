@@ -15,9 +15,10 @@ class GameController extends ChangeNotifier {
   int frogs, toads, leafs;
   int gameState = CONTINUE_GAME;
 
+  List<AvatarAnim> animations;
   List<TileAvatar> _avatarList = List<TileAvatar>();
 
-  bool hasUser = false, hasComp = true, userFirst;
+  bool hasUser = false, hasComp = true, userFirst, canTap;
 
   GameController({
     this.gameDifficulty = HARD,
@@ -27,11 +28,12 @@ class GameController extends ChangeNotifier {
     this.userFirst = false,
   }) {
     gameState = CONTINUE_GAME;
+    animations = List<AvatarAnim>();
     resetGame();
   }
   Future resetGame() async {
     SIZE = leafs;
-    
+    for (int i = 0; i < leafs; i++) animations.add(AvatarAnim.noanim);
     for (int i = 0; i < frogs; i++) _avatarList.add(TileAvatar.frog);
     for (int i = 0; i < leafs - toads - frogs; ++i) {
       _avatarList.add(TileAvatar.empty);
@@ -49,16 +51,19 @@ class GameController extends ChangeNotifier {
         hasUser = false;
       });
     }
+    canTap = true;
     await fireUpDP();
   }
 
   int getAvatarListLength() {
     return _avatarList.length;
   }
-  String turn () {
+
+  String turn() {
     if (hasComp && !hasUser) return 'Your Turn';
     return 'Android\'s Turn';
   }
+
   TileAvatar avatarAt(int i) => _avatarList[i];
 
   void setAvatarAt(int i, TileAvatar val) {
@@ -191,10 +196,15 @@ class GameController extends ChangeNotifier {
       oth = pos - 1;
     else
       oth = pos - 2;
-    TileAvatar tmp = _avatarList[oth];
-    _avatarList[oth] = _avatarList[pos];
-    _avatarList[pos] = tmp;
-    if (abs(oth - pos) == 2) toadHop = true;
+
+    print('$oth $pos');
+
+    if (abs(oth - pos) == 2) {
+      toadHop = true;
+      toadHopa(pos, oth + 1);
+    } else {
+      toadJumpa(pos, oth);
+    }
 
     for (int i = 0; i < SIZE - 1; ++i) {
       if (_avatarList[i] == TileAvatar.frog) {
@@ -211,8 +221,78 @@ class GameController extends ChangeNotifier {
     return COMPUTER_WON;
   }
 
-  int abs(int a) { return (a < 0) ? -a:a;}
+  int abs(int a) {
+    return (a < 0) ? -a : a;
+  }
+
   bool toadHop = false;
+
+  void frogJumpa(int cur, int next, Score scr) {
+    animations[cur] = AvatarAnim.jumpNext;
+    notifyListeners();
+    // animation will happen wait 500 ms for it then swap:
+    Future.delayed(Duration(milliseconds: 500), () {
+      swapAvatar(cur, next);
+      if (hasUser && !hasComp) {
+        Future.delayed(Duration(microseconds: 1000), () {
+          gameState = computerMove();
+          if (toadHop) {
+            scr.incrementHop(TileAvatar.toad);
+            toadHop = false;
+          }
+          notifyListeners();
+        });
+      }
+    });
+  }
+
+  void frogHopa(int cur, int next, Score scr) {
+    animations[cur] = AvatarAnim.hopNext;
+    notifyListeners();
+    // animation will happen wait 800 ms for it then swap:
+    Future.delayed(Duration(milliseconds: 800), () {
+      swapAvatar(cur, next + 1);
+      if (hasUser && !hasComp) {
+        Future.delayed(Duration(microseconds: 1000), () {
+          gameState = computerMove();
+          if (toadHop) {
+            scr.incrementHop(TileAvatar.toad);
+            toadHop = false;
+          }
+          notifyListeners();
+        });
+      }
+    });
+  }
+
+  void toadJumpa(int cur, int prev) {
+    animations[cur] = AvatarAnim.jumpPrev;
+    notifyListeners();
+    // animation will happen wait 500 ms for it then swap:
+    Future.delayed(Duration(milliseconds: 500), () {
+      swapAvatar(cur, prev);
+      hasComp = true;
+      hasUser = false;
+    });
+  }
+
+  void toadHopa(int cur, int prev) {
+    animations[cur] = AvatarAnim.hopPrev;
+    notifyListeners();
+    // animation will happen wait 800 ms for it then swap:
+    Future.delayed(Duration(milliseconds: 800), () {
+      swapAvatar(cur, prev - 1);
+      hasComp = true;
+      hasUser = false;
+    });
+  }
+
+  void swapAvatar(int av1, int av2) {
+    TileAvatar temp = list[av1];
+    list[av1] = list[av2];
+    list[av2] = temp;
+    notifyListeners();
+  }
 
   void onDoubleTapped(int index, Score scr) {
     int cur = index, prev = index - 1, next = index + 1;
@@ -223,25 +303,14 @@ class GameController extends ChangeNotifier {
       if (list[next] == TileAvatar.empty) {
         hasUser = true;
         hasComp = false;
-        setAvatarAt(cur, TileAvatar.empty);
-        setAvatarAt(next, TileAvatar.frog);
+        frogJumpa(cur, next, scr);
       } else if (list[next] == TileAvatar.toad && next + 1 < list.length) {
         if (list[next + 1] == TileAvatar.empty) {
           hasUser = true;
           hasComp = false;
           scr.incrementHop(TileAvatar.frog);
-          setAvatarAt(cur, TileAvatar.empty);
-          setAvatarAt(next + 1, TileAvatar.frog);
+          frogHopa(cur, next, scr);
         }
-      }
-      if (hasUser && !hasComp) {
-        Future.delayed(Duration(seconds: 1), () {
-          gameState = computerMove();
-          if (toadHop) {scr.incrementHop(TileAvatar.toad);toadHop = false;}
-          notifyListeners();
-          hasComp = true;
-          hasUser = false;
-        });
       }
     }
 

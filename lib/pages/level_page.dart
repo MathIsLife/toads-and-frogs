@@ -16,7 +16,7 @@ class LevelPage extends StatefulWidget {
   LevelPage({this.gameplay}) {
     //print('$gameplay yo wtf');
   }
-  static final route = '/level_page';
+  static final route = '/gamemode/level_page';
   @override
   _LevelPageState createState() => _LevelPageState();
 }
