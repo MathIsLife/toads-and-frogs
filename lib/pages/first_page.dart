@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:toads_and_frogs/buttons/round_button.dart';
 import 'package:toads_and_frogs/constants.dart';
 import 'package:toads_and_frogs/pages/game_modes.dart';
+import 'package:toads_and_frogs/pages/instructions_page.dart';
+import 'package:toads_and_frogs/pages/settings_page.dart';
 import 'package:toads_and_frogs/query.dart';
 import 'level_page.dart';
 
@@ -50,9 +52,7 @@ class _FirstState extends State<FirstPage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (_) => GameMode()
-                  ),
+                  MaterialPageRoute(builder: (_) => GameMode()),
                 );
               },
               tooltip: 'New Game',
@@ -100,7 +100,12 @@ class _FirstState extends State<FirstPage> {
                 ),
                 RoundButton(
                   onPressed: () {
-                    print("Settings");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => SettingsPage(),
+                      ),
+                    );
                   },
                   tooltip: 'Settings',
                   icon: Icon(
@@ -122,7 +127,10 @@ class _FirstState extends State<FirstPage> {
                 ),
                 RoundButton(
                   onPressed: () {
-                    print("Help me!");
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => InstructionPage()));
                   },
                   tooltip: 'Instructions',
                   icon: Icon(

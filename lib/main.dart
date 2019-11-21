@@ -16,7 +16,6 @@ Future main() async {
     [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight],
   );
   LevelData.loadData(); // gotta initialize once
-  
 
   runApp(MyApp());
 }
@@ -39,6 +38,8 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     scheduleMicrotask(() {
+      precacheImage(AssetImage(kiAbeer), context);
+      precacheImage(AssetImage(kiNirjhor), context);
       precacheImage(AssetImage(kiBg4), context);
       precacheImage(AssetImage(kiBg1), context);
       precacheImage(AssetImage(kiBg2), context);

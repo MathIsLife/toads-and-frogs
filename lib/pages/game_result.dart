@@ -95,6 +95,7 @@ class _GameResultState extends State<GameResult> {
                   height: 40.0 * hr,
                 ),
                 Container(
+                  width: double.infinity,
                   child: Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
@@ -104,18 +105,20 @@ class _GameResultState extends State<GameResult> {
                     color: resColor,
                     child: Padding(
                       padding: const EdgeInsets.all(24.0),
-                      child: Text(
-                        winner,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: block * 5,
-                          shadows: <Shadow>[
-                            Shadow(
-                              offset: Offset(3.0, 3.0),
-                              blurRadius: 5.0,
-                              color: Colors.black,
-                            ),
-                          ],
+                      child: Center(
+                        child: Text(
+                          winner,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: block * 5,
+                            shadows: <Shadow>[
+                              Shadow(
+                                offset: Offset(3.0, 3.0),
+                                blurRadius: 5.0,
+                                color: Colors.black,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

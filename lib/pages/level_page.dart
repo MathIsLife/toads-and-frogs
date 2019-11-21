@@ -14,7 +14,7 @@ import 'game_screen.dart';
 class LevelPage extends StatefulWidget {
   final int gameplay;
   LevelPage({this.gameplay}) {
-    //print('$gameplay yo wtf');
+    print('$gameplay yo wtf');
   }
   static final route = '/gamemode/level_page';
   @override
@@ -122,6 +122,7 @@ class LevelTile extends StatelessWidget {
   }
 
   void gotoGameMul(BuildContext context) {
+    print('going to multiplay');
     Navigator.push(
       context,
       MaterialPageRoute(

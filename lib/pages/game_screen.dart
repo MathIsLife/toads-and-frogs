@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:toads_and_frogs/backend/game_controller.dart';
 import 'package:toads_and_frogs/backend/multi_controller.dart';
 import 'package:toads_and_frogs/backend/score.dart';
+import 'package:toads_and_frogs/components/multi_tile.dart';
 import 'package:toads_and_frogs/components/tile_map.dart';
 import 'package:toads_and_frogs/components/tiles.dart';
 import 'package:toads_and_frogs/constants.dart';
@@ -22,7 +23,6 @@ class GameScreen extends StatefulWidget {
 int who = 1; //player
 
 class _GameScreenState extends State<GameScreen> {
- 
   @override
   Widget build(BuildContext context) {
     double block = Query.block;
@@ -155,12 +155,15 @@ class _TileListState extends State<TileList> {
                 .getAvatarListLength(),
         padding: const EdgeInsets.all(25.0),
         itemBuilder: (BuildContext context, int index) {
+          print('from listTile ${widget.gamePlay}');
           return Padding(
             padding: const EdgeInsets.all(10.0),
-            child: Tile(
-              gameplay: widget.gamePlay,
-              index: index,
-            ),
+            child: (widget.gamePlay == 1)
+                ? Tile(
+                    gameplay: widget.gamePlay,
+                    index: index,
+                  )
+                : MultiTile(index: index),
           );
         },
       ),

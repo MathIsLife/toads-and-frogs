@@ -18,7 +18,7 @@ class Tile extends StatelessWidget {
     this.index,
     this.gameplay = 1,
   }) {
-    //print('${++count}');
+    print('$gameplay from tile');
   }
 
   Widget getAvatar(TileAvatar avatar) {
@@ -28,6 +28,7 @@ class Tile extends StatelessWidget {
         break;
       case TileAvatar.frog:
         return Circle(
+          gameplay: gameplay,
           index: index,
           child: Image(
             image: AssetImage(kiFrog),
@@ -36,6 +37,7 @@ class Tile extends StatelessWidget {
         break;
       case TileAvatar.toad:
         return Circle(
+          gameplay: gameplay,
           index: index,
           child: Image(
             image: AssetImage(kiToad),
@@ -69,7 +71,7 @@ class Tile extends StatelessWidget {
 
   Future<void> gotoResult(context) async {
     var gc = Provider.of<GameController>(context, listen: false);
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(Duration(seconds: 1), () {
       if (gc.gameState != GameController.CONTINUE_GAME) {
         Navigator.push(
           context,
@@ -103,7 +105,7 @@ class Tile extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onDoubleTap: () {
+            onTap: () {
               if (gameplay == 1) {
                 Provider.of<GameController>(context,)
                     .onDoubleTapped(index, scr);
@@ -134,9 +136,11 @@ class Circle extends StatefulWidget {
     Key key,
     this.index,
     this.child,
+    this.gameplay,
   }) : super(key: key);
   final int index;
   final Widget child;
+  final int gameplay;
 
   @override
   _CircleState createState() => _CircleState();

@@ -128,11 +128,11 @@ class FancyButton extends StatelessWidget {
             child: Text(
               buttonText,
               style: TextStyle(
-                fontSize: 40,
+                fontSize: Query.block * 5,
                 color: Colors.white,
                 fontFamily: 'Indie Flower',
                 fontWeight: FontWeight.bold,
-                letterSpacing: 2.0,
+                letterSpacing: 1.5,
                 shadows: [
                   Shadow(
                     blurRadius: 10,

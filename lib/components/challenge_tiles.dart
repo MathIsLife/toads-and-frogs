@@ -51,16 +51,16 @@ class ChallengeTile extends StatelessWidget {
         fit: StackFit.loose,
         children: <Widget>[
           Container(
-            height: 14 * block,
-            width: 14 * block,
+            height: 9 * block,
+            width: 9 * block,
             child: Image(
               image: AssetImage(kiLeaf2),
             ),
           ),
           Container(
             margin: EdgeInsets.only(left: block * 2),
-            height: 9 * block,
-            width: 9 * block,
+            height: 7 * block,
+            width: 7 * block,
             child: getChild(gc.list[index], index),
           ),
         ],
@@ -94,8 +94,8 @@ class _CircleState extends State<Circle> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     index = widget.index;
-    containerWidth = block * 15;
-    r = 7 * block;
+    containerWidth = block * 11;
+    r = 5.5 * block;
     jumpController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 500));
     hopController =
