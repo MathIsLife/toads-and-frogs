@@ -2,12 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:path/path.dart' as path;
-import 'package:sqflite/sqflite.dart';
 import 'package:toads_and_frogs/backend/levels.dart';
 import 'package:toads_and_frogs/pages/first_page.dart';
-import 'package:toads_and_frogs/pages/game_modes.dart';
-import 'package:toads_and_frogs/pages/level_page.dart';
 import 'constants.dart';
 
 Future main() async {

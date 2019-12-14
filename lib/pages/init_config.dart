@@ -16,17 +16,15 @@ class _InitConfigState extends State<InitConfig> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       builder: (context) => Information(),
-      child: MaterialApp(
-        home: Scaffold(
-          body: Container(
-            child: Column(
-              children: <Widget>[
-                Expanded(flex: 4, child: Difficulty()),
-                Expanded(flex: 4, child: Leafs()),
-                Expanded(flex: 4, child: ToadsFrogs()),
-                StartGame(),
-              ],
-            ),
+      child: Scaffold(
+        body: Container(
+          child: Column(
+            children: <Widget>[
+              Expanded(flex: 4, child: Difficulty()),
+              Expanded(flex: 4, child: Leafs()),
+              Expanded(flex: 4, child: ToadsFrogs()),
+              StartGame(),
+            ],
           ),
         ),
       ),
@@ -45,8 +43,7 @@ class StartGame extends StatelessWidget {
       flex: 2,
       child: FlatButton(
         color: Colors.amber,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         onPressed: () {
           Navigator.push(
             context,
@@ -292,7 +289,7 @@ class _ToadsFrogsState extends State<ToadsFrogs> {
                   onPressed: () {
                     setState(() {
                       if (frogNumber < maxFrog) {
-                        info.increFrogs(); 
+                        info.increFrogs();
                       }
                     });
                   },

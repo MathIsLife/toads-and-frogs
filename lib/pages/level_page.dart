@@ -26,64 +26,65 @@ class _LevelPageState extends State<LevelPage> {
   Widget build(BuildContext context) {
     double hr = Query.heightRatio, wr = Query.widthRatio;
 
-    return MaterialApp(
-      home: Scaffold(
-        body: Stack(
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(kiBg2),
-                  fit: BoxFit.fitHeight,
-                  alignment: Alignment.bottomLeft,
-                ),
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(kiBg2),
+                fit: BoxFit.fitHeight,
+                alignment: Alignment.bottomLeft,
               ),
             ),
-            BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-              child: Container(
-                color: Colors.black.withOpacity(0),
-              ),
+          ),
+          BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+            child: Container(
+              color: Colors.black.withOpacity(0),
             ),
-            Column(
-              children: <Widget>[
-                // Container(
-                //   height: 60.0 * hr,
-                //   child: Padding(
-                //     padding: const EdgeInsets.all(8.0),
-                //     child: Center(
-                //       child: Text(
-                //         'Select a level you wish to play!',
-                //         style: TextStyle(
-                //           color: Colors.white,
-                //           fontSize: Query.block * 4,
-                //           fontWeight: FontWeight.w600,
-                //           letterSpacing: 2,
+          ),
+          Column(
+            children: <Widget>[
+              // Container(
+              //   height: 60.0 * hr,
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(8.0),
+              //     child: Center(
+              //       child: Text(
+              //         'Select a level you wish to play!',
+              //         style: TextStyle(
+              //           color: Colors.white,
+              //           fontSize: Query.block * 4,
+              //           fontWeight: FontWeight.w600,
+              //           letterSpacing: 2,
 
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                Center(
-                  child: Container(
-                    width: Query.width - 100.0,
-                    height: Query.height, //- 95.0 * hr
-                    child: GridView.builder(
-                      physics: BouncingScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 5),
-                      itemCount: 20,
-                      itemBuilder: (context, index) {
-                        return LevelTile(level: LevelData.levels[index], gamePlay: widget.gameplay,);
-                      },
-                    ),
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              Center(
+                child: Container(
+                  width: Query.width - 100.0,
+                  height: Query.height, //- 95.0 * hr
+                  child: GridView.builder(
+                    physics: BouncingScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 5),
+                    itemCount: 20,
+                    itemBuilder: (context, index) {
+                      return LevelTile(
+                        level: LevelData.levels[index],
+                        gamePlay: widget.gameplay,
+                      );
+                    },
                   ),
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -114,7 +115,9 @@ class LevelTile extends StatelessWidget {
                 builder: (context) => Score(),
               )
             ],
-            child: GameScreen(gameplay: 1,),
+            child: GameScreen(
+              gameplay: 1,
+            ),
           );
         },
       ),
@@ -141,7 +144,9 @@ class LevelTile extends StatelessWidget {
                 builder: (context) => Score(),
               )
             ],
-            child: GameScreen(gameplay: gamePlay,),
+            child: GameScreen(
+              gameplay: gamePlay,
+            ),
           );
         },
       ),
